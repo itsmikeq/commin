@@ -29,6 +29,8 @@ gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'font-awesome-sass', '~> 4.6.2'
+
 gem 'redis-namespace'
 gem 'gon'
 gem 'settingslogic'
@@ -59,6 +61,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'pry-rails'
 end
 
 group :test do

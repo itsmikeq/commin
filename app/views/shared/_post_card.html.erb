@@ -1,0 +1,37 @@
+<!--Card-->
+<div class="card valign-wrapper">
+
+  <!--Card content-->
+  <div class="card-block valign">
+    <!--Title-->
+    <h4 class="card-title">
+      <%= link_to("@#{post.user.username}", post.user.username) %>
+      <h6><%= post.updated_at %></h6>
+    </h4>
+    <!--Text-->
+    <p class="card-text"><%= post.body %></p>
+
+    <div class="pull-right">
+      <a href="#">
+        <button class="button btn btn-primary">
+          Reply
+        </button>
+      </a>
+      <div class="btn-group">
+        <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="ex2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="material-icons">more_vert</i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
+          <%= link_to post_path(post.id), class: "dropdown-item alert-danger", method: :delete do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+          <a class="dropdown-item" href="#">Hide</a>
+          <a class="dropdown-item" href="#">Share</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.Card content-->
+
+</div>
+<!--/.Card-->

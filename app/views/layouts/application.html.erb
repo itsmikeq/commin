@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Comin</title>
-    <%= csrf_meta_tags %>
+<%= render 'layouts/head' %>
+<body>
+<!--Start your project here-->
+<div class="bmd-layout-container bmd-drawer-f-l">
+  <%= render 'layouts/navbar' %>
+  <% if notice || alert %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+  <% end %>
+  <main class="bmd-layout-content">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  <!--Start your project here-->
-  <div class="container">
-    <div class="row">
+    <div class="container-fluid">
       <!--/Start your project here-->
       <%= yield %>
     </div>
-  </div>
-  </body>
+  </main>
+</div>
+</body>
 </html>

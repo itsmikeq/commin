@@ -1,5 +1,7 @@
 class FriendshipsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_friendship, only: [:show, :edit, :update, :destroy]
+  before_action :friend, only: [:create]
 
   # GET /friendships
   # GET /friendships.json
@@ -24,13 +26,14 @@ class FriendshipsController < ApplicationController
   # POST /friendships
   # POST /friendships.json
   def create
-    @friendship = current_user.friendships.build(:friend_id => friendship_params[:friend_id])
+    @friendship = current_user.friendships.build(:friend_id => friend.try(:friend_id))
 
     respond_to do |format|
-      if @friendship.save
+      if @friend && @friendship.save
         format.html { redirect_to @friendship, notice: 'Friendship was successfully created.' }
         format.json { render :show, status: :created, location: @friendship }
       else
+        flash[:notice] = "Unable to find user #{friendship_params[:username]}"
         format.html { render :new }
         format.json { render json: @friendship.errors, status: :unprocessable_entity }
       end
@@ -69,6 +72,10 @@ class FriendshipsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def friendship_params
-    params.require(:friendship).permit(:user_id, :friend_id)
+    params.require(:friendship).permit(:user_id, :friend_id, :username)
+  end
+
+  def friend
+    @friend ||= User.find_by(username: friendship_params[:username])
   end
 end

@@ -2,7 +2,8 @@ require 'seed-fu'
 users = []
 User.create!(
   :name => 'Admin',
-  :email => 'admin@comin',
+  :email => 'admin@commin',
+  :username => 'admin',
   :password => 'password',
   :password_confirmation => 'password',
   :roles => User::ROLE_ADMIN
@@ -10,6 +11,7 @@ User.create!(
 
 20.times do |i|
   users.push **{
+    name: FFaker::Internet.name,
     username: FFaker::Internet.user_name,
     email: FFaker::Internet.email,
   }

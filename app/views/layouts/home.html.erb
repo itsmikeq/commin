@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/head' %>
+<body>
+<!--Start your project here-->
+<div class="bmd-layout-container bmd-drawer-f-l">
+  <%= render 'layouts/navbar' %>
+  <%= render 'layouts/alerts' %>
+  <!--<main class="bmd-layout-content">-->
+  <main>
+    <div class="container-fluid">
+      <!--/Start your project here-->
+      <%= yield %>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

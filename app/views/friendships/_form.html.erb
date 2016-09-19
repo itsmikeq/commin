@@ -12,16 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :friend_id %>
-    <%= f.number_field :friend_id %>
+    <%= label_tag 'friendship' %>
+    <%= text_field_tag 'friendship[username]' %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= button_to 'Submit', f.submit, class: "btn btn-default" %>
   </div>
 <% end %>
