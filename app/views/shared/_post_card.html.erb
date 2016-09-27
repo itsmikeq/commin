@@ -1,37 +1,36 @@
 <!--Card-->
-<div class="card valign-wrapper">
+<div class="card horizontal">
 
   <!--Card content-->
-  <div class="card-block valign">
-    <!--Title-->
-    <h4 class="card-title">
-      <%= link_to("@#{post.user.username}", post.user.username) %>
-      <h6><%= post.updated_at %></h6>
-    </h4>
-    <!--Text-->
+  <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">
+        <%= link_to("@#{post.user.username}", post.user.username) %>
+        <h6 class="small"><%= post.updated_at %></h6>
+        <i class="material-icons right">more_vert</i>
+      </span>
     <p class="card-text"><%= post.body %></p>
-
-    <div class="pull-right">
-      <a href="#">
-        <button class="button btn btn-primary">
-          Reply
-        </button>
-      </a>
-      <div class="btn-group">
-        <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="ex2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="material-icons">more_vert</i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex2">
-          <%= link_to post_path(post.id), class: "dropdown-item alert-danger", method: :delete do %>
-              <i class="material-icons">delete</i>
-          <% end %>
-          <a class="dropdown-item" href="#">Hide</a>
-          <a class="dropdown-item" href="#">Share</a>
-        </div>
-      </div>
+    <div class="card-action">
+      <%= link_to post_path(post.id), class: "dropdown-item alert-danger", method: :delete do %>
+          <i class="material-icons">delete</i>
+      <% end %>
     </div>
   </div>
-  <!--/.Card content-->
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+    <p><%= post.body %></p>
+    <div class="input-field">
+      <!-- TODO: Create React component -->
+      <%= form_tag posts_path, method: :post do |np| %>
+          <%= hidden_field_tag 'post[reply_post_id]', post.id %>
+          <%= hidden_field_tag 'post[user_id]', current_user.id %>
+          <textarea id="<%= "reply_post_#{post.id}" %>" name='post[body]' class="materialize-textarea"></textarea>
+          <label for="<%= "reply_post_#{post.id}" %>">Reply</label>
+          <%= button_to posts_path, class: "btn waves-effect waves-light" do %>
+            Reply
+          <% end%>
+      <% end %>
+    </div>
+  </div>
 
 </div>
 <!--/.Card-->

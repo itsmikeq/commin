@@ -9,6 +9,7 @@
 #  visibility      :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  reply_post_id   :integer
 #
 # Indexes
 #
@@ -29,6 +30,7 @@ class Post < ApplicationRecord
   belongs_to :sent_to_user, foreign_key: :sent_to_user_id, class_name: 'User'
   has_many :post_topics, dependent: :destroy
   has_many :topics, through: :post_topics
+  has_many :reply_posts, ->(o) { Post.where(reply_post_id: o.id) }
 
   scope :public_posts, -> { where(visibility: PUBLIC) }
   scope :private_posts, -> { where(visibility: PRIVATE) }

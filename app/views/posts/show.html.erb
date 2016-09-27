@@ -7,7 +7,7 @@
 
 <p>
   <strong>Created by:</strong>
-  <%= @post.created_by %>
+  <%= @post.user.username %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |

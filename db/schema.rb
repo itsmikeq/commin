@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918042031) do
+ActiveRecord::Schema.define(version: 20160927050645) do
 
   create_table "friendships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160918042031) do
     t.integer  "visibility"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "reply_post_id"
     t.index ["sent_to_user_id"], name: "index_posts_on_sent_to_user_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
     t.index ["visibility"], name: "index_posts_on_visibility", using: :btree

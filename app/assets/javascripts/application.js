@@ -17,9 +17,6 @@
 
 //= require tether
 //= require snackbarjs
-//= require bootstrap-material-design/dist/bootstrap-material-design.iife
 
 $(document).on('turbolinks:load', function () {
-  // Needed for actions to work
-  $('body').bootstrapMaterialDesign({});
 });
