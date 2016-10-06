@@ -6,7 +6,8 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'mysql2'
-
+# pagination
+gem 'kaminari'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -17,11 +18,14 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+gem 'sprockets'
+gem 'sprockets-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'babel-transpiler'
+# gem 'sprockets-es6', require: 'sprockets/es6'
+# Yep, react
+gem 'react-rails', '~> 1.8.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -71,6 +75,7 @@ group :test do
   gem 'spring-commands-teaspoon'
   gem 'shoulda-matchers', require: false
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
 end
 
 group :development do

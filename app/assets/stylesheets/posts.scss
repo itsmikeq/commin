@@ -1,3 +1,22 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.clickable {
+  cursor: pointer;
+}
+
+.snackbar {
+  @extend .clickable;
+  position: fixed;
+  bottom:0%;
+}
+
+.snackbar.error {
+  @extend .snackbar;
+  background-color: #ef4040;
+}
+.snackbar.info {
+  @extend .snackbar;
+  background-color: #95dfff;
+}

@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  namespace :my do
+    get 'friends', to: 'friends#index'
+    get 'posts', to: 'posts#index'
+    get 'direct_messages', to: 'posts#direct'
+  end
+
   get 'home/index'
 
   resources :posts

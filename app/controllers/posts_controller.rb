@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = current_user.all_posts.order("created_at desc").page(params[:page]).per(100)
+    # @posts = Post.where.not(sent_to_user: nil).first(1)
   end
 
   # GET /posts/1
@@ -64,7 +66,7 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = current_user.posts.joins(:sent_to_user).find_by({posts: {id: params[:id]}}) || raise(NotFoundError.new("Cannot find post #{params[:id]}"))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

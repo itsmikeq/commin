@@ -2,18 +2,27 @@
   <a class="btn-floating btn-large red">
     <i class="material-icons">menu</i>
   </a>
-  <ul class="" style="background-color: #001f3f">
-    <ul class="list-group">
+  <ul class="right-align nav-slider">
+    <ul class="right-align">
       <li>
-        <%= link_to friendships_path, class: "" do %>
-            <i class="material-icons left">contacts</i>
-            Friends
+        <%= link_to my_friends_path, class: "" do %>
+            <i class="fa fa-users">
+              Friends
+            </i>
         <% end %>
       </li>
       <li>
         <%= link_to posts_path, class: "" do %>
-            <i class="material-icons left">format_quote</i>
-            Posts
+            <i class="fa fa-quote-right fa-2">
+              Posts
+            </i>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to my_direct_messages_path, class: "" do %>
+            <i class="fa fa-long-arrow-right fa3">
+              Direct Messages
+            </i>
         <% end %>
       </li>
       <li>

@@ -28,15 +28,18 @@ class Post < ApplicationRecord
   include Visibility
   belongs_to :user
   belongs_to :sent_to_user, foreign_key: :sent_to_user_id, class_name: 'User'
-  has_many :post_topics, dependent: :destroy
-  has_many :topics, through: :post_topics
-  has_many :reply_posts, ->(o) { Post.where(reply_post_id: o.id) }
+  has_many :post_topics
+  has_many :topics, through: :post_topics, dependent: :destroy
+  has_many :reply_posts, foreign_key: :id, class_name: 'Post'
+  validates_presence_of :user
+  validates_presence_of :body
 
   scope :public_posts, -> { where(visibility: PUBLIC) }
   scope :private_posts, -> { where(visibility: PRIVATE) }
   scope :direct_posts, -> { where(visibility: DIRECT) }
 
   after_create :find_or_create_topics
+  delegate :username, to: :user
 
   private if Rails.env.production?
   # Finds/creates topics by searching post body

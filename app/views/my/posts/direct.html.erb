@@ -1,0 +1,15 @@
+<div class="row">
+  Current user: <%= current_user.username %>
+</div>
+<div class="row">
+  <div class="col s2">
+    Friends!
+  </div>
+  <div class="col s10">
+    Messages to you
+    <%= react_component('PostApplication', posts_url: my_direct_messages_path ) %>
+  </div>
+  <div id="snackbar-error">
+  </div>
+  <div id="snackbar-info"></div>
+</div>

@@ -12,11 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
-
 //= require tether
 //= require snackbarjs
+//= require react_ujs
+//= require react
+//= require components
 
-$(document).on('turbolinks:load', function () {
+//$(document).on('turbolinks:load', function () {
+//});
+
+$(document).ready(function () {
+  console.log("ready");
+  // calls componentDidMount() on page load
+  ReactRailsUJS.mountComponents();
 });

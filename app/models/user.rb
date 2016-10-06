@@ -48,7 +48,8 @@ class User < ApplicationRecord
   has_many :identities
   # Users @user is friends with
   has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :friends, -> { where(banned: false)}, :through => :friendships
+  has_many :banned_friends, -> { where(banned: true)}, :through => :friendships, source: :user
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   # users who are friends with @user
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
@@ -59,18 +60,19 @@ class User < ApplicationRecord
 
   scope :public_users, -> { where(public: true) }
 
+  # TODO: Abstract into auth hash builder
   def self.create_with_omniauth(info)
     create(name: info['name'])
   end
 
 
-  # TODO: move to ES search
+  # TODO: move to ES search, this will be really slow
   def all_posts
     @friends_posts ||= begin
       pp = []
       pp.push *Post.public_posts.where(user_id: friends.pluck(:user_id)).pluck(:id)
       pp.push *posts.pluck(:id)
-      pp.push *direct_posts.pluck(:id)
+      pp.push *sent_messages.pluck(:id)
       pp.push *received_messages.pluck(:id)
       Post.where(id: pp).order("posts.updated_at desc")
     end
@@ -78,6 +80,10 @@ class User < ApplicationRecord
 
   def received_messages
     Post.where(sent_to_user: self)
+  end
+
+  def sent_messages
+    posts.where.not(sent_to_user_id: nil)
   end
 
   def private_posts
@@ -88,9 +94,9 @@ class User < ApplicationRecord
     posts.public_posts
   end
 
-  def direct_posts
-    posts.where(sent_to_user_id: id)
+  # TODO: Unstub and allow for image uploads
+  def image_url
+    "https://dummyimage.com/52x52/000/fff.png"
   end
-  alias_method :direct_messages, :direct_posts
 
 end

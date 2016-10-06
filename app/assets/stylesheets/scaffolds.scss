@@ -28,8 +28,7 @@ a {
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: $primary-color;
   }
 }
 
@@ -78,12 +77,18 @@ div {
     color: #fff;
   }
 
-  ul li {
-    font-size: 12px;
-    list-style: square;
-  }
 }
 
 label {
   display: block;
 }
+
+.rposition {
+  position: relative;
+  display: inline-block;
+}
+ul.scoot-up {
+  margin-top: -5px;
+  right: 34px !important;
+}
+

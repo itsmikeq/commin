@@ -1,5 +1,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "snackbarjs/dist/snackbar";
+@import "snackbarjs/themes-css/material";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -14,3 +16,9 @@
  *
  */
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "variables";
+@import "posts";
+@import "scaffolds";
+@import "home";
+@import "components/**/*";
+@import "animations/checkmark";

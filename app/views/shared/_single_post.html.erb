@@ -1,0 +1,30 @@
+<!--Card content-->
+<div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">
+        <%= link_to("@#{post.user.username}", post.user.username) %>
+        <h6 class="small"><%= post.updated_at %></h6>
+        <i class="material-icons right">more_vert</i>
+      </span>
+  <p class="card-text"><%= post.body %></p>
+  <div class="card-action">
+    <%= link_to post_path(post.id), class: "dropdown-item alert-danger", method: :delete do %>
+        <i class="material-icons">delete</i>
+    <% end %>
+  </div>
+</div>
+<div class="card-reveal">
+  <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+  <p><%= post.body %></p>
+  <div class="input-field">
+    <!-- TODO: Create React component -->
+    <%= form_tag posts_path, method: :post do |np| %>
+        <%= hidden_field_tag 'post[reply_post_id]', post.id %>
+        <%= hidden_field_tag 'post[user_id]', current_user.id %>
+        <textarea id="<%= "reply_post_#{post.id}" %>" name='post[body]' class="materialize-textarea"></textarea>
+        <label for="<%= "reply_post_#{post.id}" %>">Reply</label>
+        <%= button_to posts_path, class: "btn waves-effect waves-light" do %>
+            Reply
+        <% end%>
+    <% end %>
+  </div>
+</div>

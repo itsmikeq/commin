@@ -11,7 +11,7 @@ User.create!(
 
 20.times do |i|
   users.push **{
-    name: FFaker::Internet.name,
+    name: "#{FFaker::Name.first_name} #{FFaker::Name.last_name}",
     username: FFaker::Internet.user_name,
     email: FFaker::Internet.email,
   }

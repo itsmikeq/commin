@@ -1,6 +1,5 @@
 <!--Card-->
 <div class="card horizontal">
-
   <!--Card content-->
   <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">
@@ -26,11 +25,10 @@
           <textarea id="<%= "reply_post_#{post.id}" %>" name='post[body]' class="materialize-textarea"></textarea>
           <label for="<%= "reply_post_#{post.id}" %>">Reply</label>
           <%= button_to posts_path, class: "btn waves-effect waves-light" do %>
-            Reply
+              Reply
           <% end%>
       <% end %>
     </div>
   </div>
-
 </div>
 <!--/.Card-->

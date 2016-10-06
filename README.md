@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# TODO
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Personalized colors for responses
+  * Color the box shadow -- selectable by user
+* Inset responses
+* Add Chat
+* Add Chat Groups
+* Allow for showing avatars in the chat (amorphous little creature-things)
+  * see https://marvelapp.com/2gdjhgg/screen/7809390
+* Allow for users to create avatars
+  
