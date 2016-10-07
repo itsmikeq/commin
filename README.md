@@ -10,4 +10,5 @@
 * Allow for showing avatars in the chat (amorphous little creature-things)
   * see https://marvelapp.com/2gdjhgg/screen/7809390
 * Allow for users to create avatars
+* Add Elastic Search functionality so things are not so slow
   
