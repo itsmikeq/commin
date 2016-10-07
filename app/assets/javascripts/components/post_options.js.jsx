@@ -1,5 +1,5 @@
 var PostOptions = React.createClass({
-  _buildDelete: function(){
+  _buildDelete: function () {
     if (this.props.canDelete) {
       return (
           <li>
@@ -9,13 +9,13 @@ var PostOptions = React.createClass({
           </li>
       )
     } else {
-      return(null)
+      return (null)
     }
   },
   render: function () {
     return (
-        <div className="right">
-          <ul className="scoot-up">
+        <div className="valign-wrapper">
+          <ul className="valign">
             <li>
               <a className="btn btn-floating btn-reply" onClick={this.props.handleReply}>
                 <i className="fa fa-reply"/>

@@ -46,9 +46,8 @@ var Post = React.createClass({
         <div className="row">
           <div id={'post_' + this.props.post.id} className="card">
             <div className="card-content">
-              <div className="card-title grey-text text-darken-4 valign">
-                <PostOptions handleDelete={this._deletePost} handleReply={this._showResponse} canDelete={gon.current_user.username == this.props.post.username}/>
-                <a href={"/users/" + this.props.post.user_id}>@{this.props.post.username}</a>
+              <div className="card-title text-darken-4 valign">
+                <a href={"/posts/" + this.props.post.username}>@{this.props.post.username}</a>
                 <Checkmark display={this.state.posted}/>
               </div>
               <h6 className="small">
@@ -57,6 +56,10 @@ var Post = React.createClass({
               <p className="card-text">
                 {this.props.post.body}
               </p>
+            </div>
+            <div className="card-action">
+              <PostOptions handleDelete={this._deletePost} handleReply={this._showResponse}
+                           canDelete={gon.current_user.username == this.props.post.username}/>
             </div>
           </div>
           {this.state.showResponse ?

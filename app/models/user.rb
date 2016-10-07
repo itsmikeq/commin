@@ -57,6 +57,7 @@ class User < ApplicationRecord
   has_many :topics
   # posts @user has created
   has_many :posts
+  validates_presence_of :username
 
   scope :public_users, -> { where(public: true) }
 
@@ -97,6 +98,10 @@ class User < ApplicationRecord
   # TODO: Unstub and allow for image uploads
   def image_url
     "https://dummyimage.com/52x52/000/fff.png"
+  end
+
+  def to_param
+    username
   end
 
 end

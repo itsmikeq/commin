@@ -20,3 +20,7 @@
   @extend .snackbar;
   background-color: #95dfff;
 }
+
+.card-title {
+  font-size: ($base-font-size * 1.25);
+}

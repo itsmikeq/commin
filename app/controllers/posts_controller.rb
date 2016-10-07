@@ -9,6 +9,25 @@ class PostsController < ApplicationController
     # @posts = Post.where.not(sent_to_user: nil).first(1)
   end
 
+  def by_user
+    puts "PARAMS: #{params.inspect}"
+    username = if params[:username].match(/.json/)
+                 params[:username].split('.json').first
+               else
+                 params[:username]
+               end
+    respond_to do |format|
+      format.json {
+        @posts = User.find_by(username: username).public_posts
+        render 'posts/index', format: :json
+      }
+      format.html {
+        render 'posts/by_user'
+      }
+    end
+
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show
@@ -64,13 +83,13 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = current_user.posts.joins(:sent_to_user).find_by({posts: {id: params[:id]}}) || raise(NotFoundError.new("Cannot find post #{params[:id]}"))
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = current_user.posts.joins(:sent_to_user).find_by({posts: {id: params[:id]}}) || raise(NotFoundError.new("Cannot find post #{params[:id]}"))
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:body, :user_id, :reply_post_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:body, :user_id, :reply_post_id)
+  end
 end

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   protect_from_forgery with: :exception
   before_action :set_gon_stuff
 
@@ -12,16 +13,18 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_gon_stuff
-    gon.current_user = current_user
+    gon.current_user   = current_user
+    gon.body_data_page = body_data_page
   end
 
   def signed_in?
     !!current_user
   end
+
   helper_method :signed_in?
 
   def current_user=(user)
-    @current_user = user
+    @current_user     = user
     session[:user_id] = user.nil? ? nil : user.id
   end
 end

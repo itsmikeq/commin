@@ -5,13 +5,3 @@
 .flex-center {
   color: #dadada;
 }
-
-.nav-slider {
-  background-color: #001f3f;
-  border-radius: 8px;
-}
-
-.nav-slider.fixed-action-btn.active ul {
-  @extend .nav-slider;
-  z-index: 999999 !important;
-}

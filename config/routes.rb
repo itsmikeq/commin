@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   end
 
   get 'home/index'
-
+  # posts_by_user_path
+  get 'posts/:username', constraints: { username: /[a-zA-Z.\/0-9_\-]+/ }, :to => "posts#by_user", :as => :posts_by_user
   resources :posts
   resources :topics
   resources :friendships
