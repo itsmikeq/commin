@@ -14,7 +14,7 @@ var PostOptions = React.createClass({
   },
   render: function () {
     return (
-        <div className="valign-wrapper">
+        <div className="valign-wrapper post-button-list">
           <ul className="valign">
             <li>
               <a className="btn btn-floating btn-reply" onClick={this.props.handleReply}>

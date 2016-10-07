@@ -1,0 +1,12 @@
+/* Inline List */
+.inline li {
+  display: inline;
+  list-style-type: none;
+}
+
+.post-button-list {
+  @extend .inline;
+  li {
+    margin-left: 13px;
+  }
+}
