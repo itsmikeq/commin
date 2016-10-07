@@ -10,7 +10,6 @@ class PostsController < ApplicationController
   end
 
   def by_user
-    puts "PARAMS: #{params.inspect}"
     username = if params[:username].match(/.json/)
                  params[:username].split('.json').first
                else
@@ -26,6 +25,23 @@ class PostsController < ApplicationController
       }
     end
 
+  end
+  
+  def by_topic
+    topic = if params[:topic].match(/.json/)
+                 params[:topic].split('.json').first
+               else
+                 params[:topic]
+               end
+    respond_to do |format|
+      format.json {
+        @posts = Topic.find_by(tag: topic).posts.public_posts
+        render 'posts/index', format: :json
+      }
+      format.html {
+        render 'posts/by_user'
+      }
+    end
   end
 
   # GET /posts/1
@@ -85,7 +101,7 @@ class PostsController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = current_user.posts.joins(:sent_to_user).find_by({posts: {id: params[:id]}}) || raise(NotFoundError.new("Cannot find post #{params[:id]}"))
+    @post = current_user.posts.find_by(id: params[:id]) || raise(NotFoundError.new("Cannot find post #{params[:id]}"))
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

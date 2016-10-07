@@ -26,6 +26,10 @@ var Post = React.createClass({
   _showResponse: function () {
     this.setState({showResponse: true})
   },
+  _renderBody: function () {
+    var htmlBody = this.props.post.body;
+    return htmlBody.replace(/(^|\s)#([a-z\d-]+)/ig, "$1<a href='/tags/$2' class='hash_tag'>#$2</a>");
+  },
   _deletePost: function () {
     var self = this;
     if (!confirm('are you sure you want to delete ' + this.props.post.id + '?')) {
@@ -53,9 +57,7 @@ var Post = React.createClass({
               <h6 className="small">
                 {this.props.post.updated_at}
               </h6>
-              <p className="card-text">
-                {this.props.post.body}
-              </p>
+              <PostBody body={this.props.post.body} />
             </div>
             <div className="card-action">
               <PostOptions handleDelete={this._deletePost} handleReply={this._showResponse}
