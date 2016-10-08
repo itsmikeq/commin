@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       format.json {
         # TODO: response based on friendship
         # TODO: If friend, then public + private + associated direct posts
-        @posts = User.find_by(username: username).public_posts
+        @posts = User.find_by(username: username).public_posts.includes(:reply_posts)
         render 'posts/index', format: :json
       }
       format.html {
