@@ -12,8 +12,20 @@ var PostResponse = React.createClass({
       posted: false
     })
   },
+  _handleKeyDown: function(event) {
+    if (event.keyCode == 13 /*enter*/) {
+      // not sure if i should call this._submitResponse here or not
+    }
+    if (event.keyCode == 27 /*esc*/) {
+      $(event.target).parents().find('.response').hide();
+    }
+  },
+  componentWillUnMount: function() {
+    $('.focused').off('keydown', this._handleKeyDown);
+  },
   componentDidMount: function () {
     $('.focused').focus();
+    $('.response').on('keydown', this._handleKeyDown);
   },
   _submitResponse: function () {
     // TODO: handle the reply post
@@ -41,7 +53,7 @@ var PostResponse = React.createClass({
   render: function () {
     var post = this.props.post;
     return (
-        <div>
+        <div className="response">
           <i className="material-icons right clickable" onClick={this.props.hideMe}> close </i>
           <div className="card-title grey-text text-darken-4">
             <br/>

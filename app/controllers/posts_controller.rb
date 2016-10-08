@@ -20,6 +20,8 @@ class PostsController < ApplicationController
                end
     respond_to do |format|
       format.json {
+        # TODO: response based on friendship
+        # TODO: If friend, then public + private + associated direct posts
         @posts = User.find_by(username: username).public_posts
         render 'posts/index', format: :json
       }
@@ -38,6 +40,8 @@ class PostsController < ApplicationController
                end
     respond_to do |format|
       format.json {
+        # TODO: response based on friendship
+        # TODO: If friend, then public + private + associated direct posts
         @posts = Topic.find_by(tag: topic).posts.public_posts
         render 'posts/index', format: :json
       }
