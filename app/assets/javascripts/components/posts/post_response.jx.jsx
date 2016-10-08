@@ -12,6 +12,9 @@ var PostResponse = React.createClass({
       posted: false
     })
   },
+  componentDidMount: function () {
+    $('.focused').focus();
+  },
   _submitResponse: function () {
     // TODO: handle the reply post
     // Create the record
@@ -37,7 +40,6 @@ var PostResponse = React.createClass({
   },
   render: function () {
     var post = this.props.post;
-    console.log(this.props);
     return (
         <div>
           <i className="material-icons right clickable" onClick={this.props.hideMe}> close </i>
@@ -48,7 +50,7 @@ var PostResponse = React.createClass({
             <i className="material-icons prefix">mode_edit</i>
             <label htmlFor={"reply_post_" + post.id}>Reply</label>
             <input type="hidden" name="post[reply_post_id]" value={post.id}/>
-            <textarea id={"reply_post_" + post.id} name='post[body]' className="materialize-textarea"/>
+            <textarea id={"reply_post_" + post.id} name='post[body]' className="materialize-textarea focused"/>
             <button type="button" onClick={this._submitResponse} className="btn waves-effect waves-light">
               Post
             </button>
