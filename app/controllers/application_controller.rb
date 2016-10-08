@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def set_gon_stuff
     gon.current_user   = current_user
     gon.body_data_page = body_data_page
-    gon.tags_url_base  = '/posts/topics'
+    gon.tags_url_base  = '/tags'
   end
 
   def signed_in?

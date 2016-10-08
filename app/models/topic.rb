@@ -24,4 +24,5 @@ class Topic < ApplicationRecord
   belongs_to :user
   # See what users are talking about
   has_many :users, through: :posts
+  validates_uniqueness_of :tag
 end

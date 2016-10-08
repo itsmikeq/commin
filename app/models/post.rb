@@ -47,7 +47,8 @@ class Post < ApplicationRecord
   def find_or_create_topics
     body.scan(/(?:\s|^)(?:#(?!(?:\d+|\w+?_|_\w+?)(?:\s|$)))(\w+)(?=\s|$)/).each do |words|
       words.each do |word|
-        topics.find_or_create_by(tag: word.strip, user_id: user.id)
+        topic = Topic.find_or_create_by(tag: word.strip)
+        topics << topic
       end
     end
   end

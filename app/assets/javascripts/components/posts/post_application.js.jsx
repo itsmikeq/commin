@@ -31,10 +31,25 @@ var PostApplication = React.createClass({
           />);
         }
     );
-    return (
-        <div id="posts">
-          {_posts}
-        </div>
-    );
+    if (_posts.length > 0) {
+      return (
+          <div>
+            <Search/>
+            <div id="posts">
+              {_posts}
+            </div>
+          </div>
+      );
+    } else {
+      return (
+          <div className="row">
+            <div className="col s8">
+              Nothing here... try looking for something
+              <Search/>
+            </div>
+          </div>
+      );
+    }
+
   }
 });

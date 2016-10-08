@@ -5,8 +5,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = current_user.all_posts.order("created_at desc").page(params[:page]).per(100)
-    # @posts = Post.where.not(sent_to_user: nil).first(1)
+    @posts = if current_user
+               current_user.all_posts
+             else
+               Post.public_posts
+             end.order("created_at desc").page(params[:page]).per(100)
   end
 
   def by_user

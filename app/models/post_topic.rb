@@ -10,8 +10,9 @@
 #
 # Indexes
 #
-#  index_post_topics_on_post_id   (post_id)
-#  index_post_topics_on_topic_id  (topic_id)
+#  index_post_topics_on_post_id               (post_id)
+#  index_post_topics_on_post_id_and_topic_id  (post_id,topic_id)
+#  index_post_topics_on_topic_id              (topic_id)
 #
 # Foreign Keys
 #

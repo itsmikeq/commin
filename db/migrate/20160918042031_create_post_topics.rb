@@ -6,5 +6,6 @@ class CreatePostTopics < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index(:post_topics, [:post_id, :topic_id])
   end
 end

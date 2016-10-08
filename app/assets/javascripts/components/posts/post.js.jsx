@@ -45,6 +45,21 @@ var Post = React.createClass({
       }
     });
   },
+  username: function () {
+    try {
+      return (gon.current_user.username);
+    } catch (TypeError) {
+      return ("");
+    }
+  },
+  _buildPostOptions: function () {
+    if (this.username().length > 0) {
+      return (
+          <PostOptions handleDelete={this._deletePost} handleReply={this._showResponse}
+                       canDelete={this.username() == this.props.post.username}/>
+      );
+    }
+  },
   render: function () {
     return (
         <div className="row">
@@ -57,11 +72,10 @@ var Post = React.createClass({
               <h6 className="small">
                 {this.props.post.updated_at}
               </h6>
-              <PostBody body={this.props.post.body} />
+              <PostBody body={this.props.post.body}/>
             </div>
             <div className="card-action">
-              <PostOptions handleDelete={this._deletePost} handleReply={this._showResponse}
-                           canDelete={gon.current_user.username == this.props.post.username}/>
+              {this._buildPostOptions()}
             </div>
           </div>
           {this.state.showResponse ?

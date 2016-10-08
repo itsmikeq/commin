@@ -6,12 +6,13 @@ Rails.application.routes.draw do
     get 'direct_messages', to: 'posts#direct'
   end
 
+  resources :posts
   get 'home/index'
   # posts_by_user_path
   get 'posts/:username', constraints: { username: /[a-zA-Z.\/0-9_\-]+/ }, :to => "posts#by_user", :as => :posts_by_user
   # Used in gon variable... Be sure to change there too
-  get 'posts/tags/:tag', constraints: { tag: /[a-zA-Z.\/0-9_\-]+/ }, :to => "posts#by_tag", :as => :posts_by_tag
-  resources :posts
+  get 'tags/:tag', constraints: { tag: /[a-zA-Z.\/0-9_\-]+/ }, :to => "posts_by_tag#posts", :as => :posts_by_tag
+  resources :posts_by_tag
   resources :topics
   resources :friendships
   devise_for :users

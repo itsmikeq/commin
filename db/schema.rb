@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160927050645) do
     t.integer  "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id", "topic_id"], name: "index_post_topics_on_post_id_and_topic_id", using: :btree
     t.index ["post_id"], name: "index_post_topics_on_post_id", using: :btree
     t.index ["topic_id"], name: "index_post_topics_on_topic_id", using: :btree
   end

@@ -8,7 +8,7 @@
     Friends!
   </div>
   <div class="col s10">
-    <%= react_component('PostApplication', posts_url: posts_path) %>
+    <%= react_component('PostApplication', posts_url: posts_by_tag_path(params[:tag]) ) %>
   </div>
   <div id="snackbar-error">
   </div>

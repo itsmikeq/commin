@@ -22,6 +22,18 @@ module Visibility
 
   end
 
+  def public?
+    visibility == PUBLIC
+  end
+
+  def private?
+    !public?
+  end
+
+  def direct?
+    visibility == DIRECT
+  end
+
   def visibility_level
     self.class.levels_visibility[visibility]
   end
