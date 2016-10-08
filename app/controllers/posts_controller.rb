@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def by_user
-    username = if params[:username].match(/.json/)
+    username = if params[:username].match(/.json$/)
                  params[:username].split('.json').first
                else
                  params[:username]
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   end
   
   def by_topic
-    topic = if params[:topic].match(/.json/)
+    topic = if params[:topic].match(/.json$/)
                  params[:topic].split('.json').first
                else
                  params[:topic]
