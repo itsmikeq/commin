@@ -9,7 +9,8 @@ var PostResponse = React.createClass({
   },
   getInitialState: function () {
     return ({
-      posted: false
+      posted: false,
+      formId: "reply_post_text_" + this.props.post.id
     })
   },
   componentWillUnMount: function() {
@@ -18,6 +19,7 @@ var PostResponse = React.createClass({
   componentDidMount: function () {
     $('.focused').focus();
     $('.response').on('keydown', this._handleKeyDown);
+    this.props['formId'] = "reply_post_text" + this.props.post.id;
   },
   _handleKeyDown: function(event) {
     if (event.keyCode == 13 /*enter*/) {
@@ -31,20 +33,21 @@ var PostResponse = React.createClass({
     // TODO: handle the reply post
     // Create the record
     // Show some feedback that the response has been registered
-    var data = $("#reply_post_" + this.props.post.id).val();
+    var data = document.getElementById(this.state.formId).value;
     // at least 5 characters of response
     if (data.length < 5) {
       return false;
     }
-    self = this;
+    var self = this;
     $.ajax({
       url: '/posts.json',
       method: 'post',
       data: {id: this.props.post.id, "post[body]": data, "post[reply_post_id]": this.props.post.id},
-      success: function () {
+      success: function (data) {
+        // we get data back here - may be better to just append it to the dom
         self.props.hideMe();
         self.props.setPosted(true);
-        self.props.callback();
+        self.props.callback(data);
       }, error: function (xhr, status, error) {
         $.snackbar({content: error, style: "error", htmlAllowed: true, timeout: 2000});
       }
@@ -60,9 +63,9 @@ var PostResponse = React.createClass({
           </div>
           <div className="input-field">
             <i className="material-icons prefix">mode_edit</i>
-            <label htmlFor={"reply_post_" + post.id}>Reply</label>
+            <label htmlFor={this.state.formId}>Reply</label>
             <input type="hidden" name="post[reply_post_id]" value={post.id}/>
-            <textarea id={"reply_post_" + post.id} name='post[body]' className="materialize-textarea focused"/>
+            <textarea id={this.state.formId} name='post[body]' className="materialize-textarea focused"/>
             <button type="button" onClick={this._submitResponse} className="btn waves-effect waves-light">
               Post
             </button>

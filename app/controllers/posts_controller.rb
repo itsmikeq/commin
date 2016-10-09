@@ -12,32 +12,12 @@ class PostsController < ApplicationController
              end.order("created_at desc").page(params[:page]).per(100)
   end
 
-  def by_user
-    username = if params[:username].match(/.json$/)
-                 params[:username].split('.json').first
-               else
-                 params[:username]
-               end
-    respond_to do |format|
-      format.json {
-        # TODO: response based on friendship
-        # TODO: If friend, then public + private + associated direct posts
-        @posts = User.find_by(username: username).public_posts.includes(:reply_posts)
-        render 'posts/index', format: :json
-      }
-      format.html {
-        render 'posts/by_user'
-      }
-    end
-
-  end
-  
   def by_topic
     topic = if params[:topic].match(/.json$/)
-                 params[:topic].split('.json').first
-               else
-                 params[:topic]
-               end
+              params[:topic].split('.json').first
+            else
+              params[:topic]
+            end
     respond_to do |format|
       format.json {
         # TODO: response based on friendship
@@ -54,6 +34,25 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    respond_to do |format|
+      format.json {
+        # TODO: response based on friendship
+        # TODO: If friend, then public + private + associated direct posts
+        if @post && params[:children]
+          @posts = @post.reply_posts.uniq
+          render 'posts/index', format: :json
+        elsif @post
+          @posts = [@post]
+          render 'posts/index', format: :json
+        else
+          @posts = []
+          render json: []
+        end
+      }
+      format.html {
+        render 'posts/by_user'
+      }
+    end
   end
 
   # GET /posts/new
@@ -107,8 +106,9 @@ class PostsController < ApplicationController
 
   private
   # Use callbacks to share common setup or constraints between actions.
+  # TODO: Filter for current_user access
   def set_post
-    @post = current_user.posts.find_by(id: params[:id]) || raise(NotFoundError.new("Cannot find post #{params[:id]}"))
+    @post = Post.find_by(id: params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

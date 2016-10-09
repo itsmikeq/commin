@@ -11,4 +11,5 @@
   * see https://marvelapp.com/2gdjhgg/screen/7809390
 * Allow for users to create avatars
 * Add Elastic Search functionality so things are not so slow
+  * https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-persistence
 * Add pagination for post views  

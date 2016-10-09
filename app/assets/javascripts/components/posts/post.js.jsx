@@ -5,15 +5,32 @@ var Post = React.createClass({
     reply_to_user: React.PropTypes.object,
     user_id: React.PropTypes.string,
     updated_at: React.PropTypes.string,
-    reply_post_id: React.PropTypes.string
+    reply_post_id: React.PropTypes.string,
+    reply_posts: React.PropTypes.array
   },
   getInitialState: function () {
     return ({
       showResponse: false,
-      posted: false
+      posted: false,
+      reply_posts: this.props.post.reply_posts || []
     })
   },
-
+  _getChildrenFromApi: function () {
+    var url = '/posts/' + this.props.post.id + '.json?children=true';
+    var self = this;
+    $.ajax({
+      url: url,
+      success: function (data) {
+        self.setState({reply_posts: data});
+      },
+      error: function (xhr, status, error) {
+        $('#snackbar-error').snackbar({content: error, style: "toast", htmlAllowed: true, timeout: 2000});
+      }
+    });
+  },
+  componentWillMount: function(){
+    this._getChildrenFromApi();
+  },
   _setPosted: function (_state) {
     this.setState({posted: _state})
   },
@@ -28,7 +45,7 @@ var Post = React.createClass({
   },
   _renderBody: function () {
     var htmlBody = this.props.post.body;
-    return htmlBody.replace(/(^|\s)#([a-z\d-]+)/ig, "$1<a href='/tags/$2' class='hash_tag'>#$2</a>");
+    return htmlBody.replace(/(^|\s)#([a-z\d-]+)/ig, "$1<a href='" + gon.tags_url_base + "/$2' class='hash_tag'>#$2</a>");
   },
   _deletePost: function () {
     var self = this;
@@ -40,6 +57,7 @@ var Post = React.createClass({
       method: 'delete',
       success: function () {
         self._hidePost();
+        //self._getChildrenFromApi();
       }, error: function (xhr, status, error) {
         $.snackbar({content: error, style: "error", htmlAllowed: true, timeout: 2000});
       }
@@ -49,6 +67,7 @@ var Post = React.createClass({
     try {
       return (gon.current_user.username);
     } catch (TypeError) {
+      // user is not logged in
       return ("");
     }
   },
@@ -60,13 +79,36 @@ var Post = React.createClass({
       );
     }
   },
+  _appendToChildren: function(child){
+    var children = this.state.reply_posts || [];
+    children.push(child);
+    this.state({reply_posts: children})
+  },
+  _render_responses: function () {
+    if (this.state.reply_posts == undefined || this.state.reply_posts.length < 1) {
+      return (null);
+    }
+    var _reply_posts = [];
+    var self = this;
+    this.state.reply_posts.forEach(
+        function (reply_post) {
+          _reply_posts.push(
+              <Post post={reply_post}
+                    callback={self._appendToChildren}
+                    key={"reply_post_" + reply_post.id}
+              />
+          );
+        }
+    );
+    return (_reply_posts);
+  },
   render: function () {
     return (
-        <div className="row">
+        <div className="row post">
           <div id={'post_' + this.props.post.id} className="card">
             <div className="card-content">
               <div className="card-title text-darken-4 valign">
-                <a href={"/posts/" + this.props.post.username}>@{this.props.post.username}</a>
+                <a href={"/posts/by/user/" + this.props.post.username}>@{this.props.post.username}</a>
                 <Checkmark display={this.state.posted}/>
               </div>
               <h6 className="small">
@@ -77,12 +119,15 @@ var Post = React.createClass({
             <div className="card-action">
               {this._buildPostOptions()}
             </div>
+            <div className="responses">
+              {this._render_responses()}
+            </div>
           </div>
           {this.state.showResponse ?
               <PostResponse post={this.props.post}
                             hideMe={this._hideResponse}
                             setPosted={this._setPosted}
-                            callback={this.props.callback}/>
+                            callback={this._getChildrenFromApi}/>
               : null
           }
         </div>

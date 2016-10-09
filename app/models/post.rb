@@ -30,7 +30,7 @@ class Post < ApplicationRecord
   belongs_to :sent_to_user, foreign_key: :sent_to_user_id, class_name: 'User'
   has_many :post_topics
   has_many :topics, through: :post_topics, dependent: :destroy
-  has_many :reply_posts, foreign_key: :id, class_name: 'Post'
+  has_many :reply_posts, foreign_key: :reply_post_id, class_name: 'Post'
   validates_presence_of :user
   validates_presence_of :body
 

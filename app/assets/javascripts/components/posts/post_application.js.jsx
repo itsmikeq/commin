@@ -4,10 +4,15 @@ var PostApplication = React.createClass({
       posts: []
     })
   },
-  _getDataFromApi: function () {
+  _getDataFromApi: function (_props) {
+    console.log(_props);
+    var url = this.props.posts_url + '.json';
+    if (_props != undefined) {
+      url = this.props.posts_url + '/' + _props.id + '.json'
+    }
     var self = this;
     $.ajax({
-      url: this.props.posts_url + '.json',
+      url: url,
       success: function (data) {
         self.setState({posts: data});
       },
