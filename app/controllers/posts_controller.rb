@@ -12,25 +12,6 @@ class PostsController < ApplicationController
              end.order("created_at desc").page(params[:page]).per(100)
   end
 
-  def by_topic
-    topic = if params[:topic].match(/.json$/)
-              params[:topic].split('.json').first
-            else
-              params[:topic]
-            end
-    respond_to do |format|
-      format.json {
-        # TODO: response based on friendship
-        # TODO: If friend, then public + private + associated direct posts
-        @posts = Topic.find_by(tag: topic).posts.public_posts
-        render 'posts/index', format: :json
-      }
-      format.html {
-        render 'posts/by_user'
-      }
-    end
-  end
-
   # GET /posts/1
   # GET /posts/1.json
   def show
