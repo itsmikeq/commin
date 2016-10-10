@@ -39,6 +39,12 @@ gem 'redis-namespace'
 gem 'gon'
 gem 'settingslogic'
 
+# Background jobs
+gem 'sidekiq'
+
+# ES
+gem 'elasticsearch-persistence', require: 'elasticsearch/persistence/model'
+gem 'oj'
 # Auth
 gem 'devise'
 gem 'omniauth'

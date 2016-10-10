@@ -2,9 +2,9 @@ module Visibility
   extend ActiveSupport::Concern
 
   included do
-    PUBLIC  = 0x01.freeze
-    PRIVATE = 0x02.freeze
-    DIRECT  = 0x04.freeze
+    PUBLIC  = 0x00.freeze
+    PRIVATE = 0x01.freeze
+    DIRECT  = 0x02.freeze
 
     before_create :set_visibility
 

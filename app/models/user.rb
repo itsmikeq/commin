@@ -48,8 +48,8 @@ class User < ApplicationRecord
   has_many :identities
   # Users @user is friends with
   has_many :friendships
-  has_many :friends, -> { where(banned: false)}, :through => :friendships
-  has_many :banned_friends, -> { where(banned: true)}, :through => :friendships, source: :user
+  has_many :friends, -> { where(banned: false) }, :through => :friendships
+  has_many :banned_friends, -> { where(banned: true) }, :through => :friendships, source: :user
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   # users who are friends with @user
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
@@ -57,7 +57,10 @@ class User < ApplicationRecord
   has_many :topics
   # posts @user has created
   has_many :posts
+  after_destroy :remove_messages
+
   validates_presence_of :username
+  validates_uniqueness_of :username
 
   scope :public_users, -> { where(public: true) }
 
@@ -66,6 +69,26 @@ class User < ApplicationRecord
     create(name: info['name'])
   end
 
+  def remove_messages
+    messages.map(&:destroy)
+  end
+
+  # Has Many relationship for messages
+  def messages
+    Message.all(
+      query:        {
+        match: {created_by: username}
+      },
+      sort:         [{
+                       created_at: {order: 'desc'}
+                     }],
+      aggregations: {tags: {terms: {field: 'tags'}}},
+    )
+  end
+
+  def mentions
+
+  end
 
   # TODO: move to ES search, this will be really slow
   def all_posts
