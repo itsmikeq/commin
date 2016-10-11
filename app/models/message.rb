@@ -1,7 +1,6 @@
 class Message
   include Elasticsearch::Persistence::Model
   include Visibility
-  attr_accessor :id
 
   #
   # Message body
@@ -107,8 +106,8 @@ class Message
   end
 
   def initialize(options = {})
+    @id = self.id || SecureRandom.uuid
     super(options)
-    @id = options[:id] || SecureRandom.uuid
   end
 
   def like

@@ -22,8 +22,8 @@ gem 'sprockets'
 gem 'sprockets-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# gem 'babel-transpiler'
-# gem 'sprockets-es6', require: 'sprockets/es6'
+# Allow es6
+gem 'sprockets-es6'
 # Yep, react
 gem 'react-rails', '~> 1.8.2'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

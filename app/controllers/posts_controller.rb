@@ -9,7 +9,7 @@ class PostsController < ApplicationController
                current_user.all_posts
              else
                Post.public_posts
-             end.order("created_at desc").page(params[:page]).per(100)
+             end.order("created_at desc").page(params[:page]).per(10)
   end
 
   # GET /posts/1
@@ -19,16 +19,14 @@ class PostsController < ApplicationController
       format.json {
         # TODO: response based on friendship
         # TODO: If friend, then public + private + associated direct posts
-        if @post && params[:children]
-          @posts = @post.reply_posts.uniq
-          render 'posts/index', format: :json
-        elsif @post
-          @posts = [@post]
-          render 'posts/index', format: :json
-        else
-          @posts = []
-          render json: []
-        end
+        @posts = if @post && params[:children]
+                   @post.reply_posts.order("created_at desc").page(params[:page]).per(100)
+                 elsif @post
+                   @posts = [@post]
+                 else
+                   []
+                 end
+        render 'posts/index', format: :json
       }
       format.html {
         render 'posts/by_user'

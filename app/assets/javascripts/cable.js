@@ -3,11 +3,10 @@
 //
 //= require action_cable
 //= require_self
-//= require_tree ./channels
-
-(function() {
-  this.App || (this.App = {});
-
-  App.cable = ActionCable.createConsumer();
-
-}).call(this);
+//= require channels
+//(function() {
+//  this.App || (this.App = {});
+//  console.log("Gon URL: " + gon.ws_url);
+//  App.cable = ActionCable.createConsumer(gon.ws_url);
+//
+//}).call(this);

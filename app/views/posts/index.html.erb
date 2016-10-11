@@ -7,9 +7,10 @@
   <div class="col s2">
     Friends!
   </div>
-  <div class="col s10">
+  <div class="col s7">
     <%= react_component('PostApplication', posts_url: posts_path) %>
   </div>
+  <%= render 'chat/chatbox' %>
   <div id="snackbar-error">
   </div>
   <div id="snackbar-info"></div>

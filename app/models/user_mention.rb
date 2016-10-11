@@ -1,6 +1,5 @@
 class UserMention
   include Elasticsearch::Persistence::Model
-  attr_accessor :id
 
   #
   # Created by (username)
@@ -25,8 +24,8 @@ class UserMention
   end
 
   def initialize(options = {})
+    @id = self.id || SecureRandom.uuid
     super(options)
-    @id = options[:id] || SecureRandom.uuid
   end
 
   # Has Many messages

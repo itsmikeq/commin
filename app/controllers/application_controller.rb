@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     gon.current_user   = current_user
     gon.body_data_page = body_data_page
     gon.tags_url_base  = '/posts/by/tag'
+    gon.ws_url         = 'ws://localhost:3000/cable'
   end
 
   def signed_in?

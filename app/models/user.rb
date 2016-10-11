@@ -87,7 +87,7 @@ class User < ApplicationRecord
   end
 
   def mentions
-
+    UserMention.find_by_username(username)
   end
 
   # TODO: move to ES search, this will be really slow
@@ -98,8 +98,8 @@ class User < ApplicationRecord
       pp.push *posts.pluck(:id)
       pp.push *sent_messages.pluck(:id)
       pp.push *received_messages.pluck(:id)
-      Post.where(id: pp).order("posts.updated_at desc")
-    end
+      Post.where(id: pp)
+    end.where(reply_post_id: nil)
   end
 
   def received_messages

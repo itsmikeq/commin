@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
   namespace :my do
     get 'friends', to: 'friends#index'
     get 'posts', to: 'posts#index'

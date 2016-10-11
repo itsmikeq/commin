@@ -17,6 +17,8 @@
 //= require react_ujs
 //= require react
 //= require components
+//= require cable
+//= require_tree .
 
 //$(document).on('turbolinks:load', function () {
 //});
