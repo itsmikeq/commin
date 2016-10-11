@@ -3,8 +3,9 @@ class MessagesChannel < ApplicationCable::Channel
   def subscribed
     # puts "DATA: #{data.inspect}"
     # stream_from "messages_#{current_user.id}"
+    puts "PARAMS: #{params.inspect}"
     if params[:room]
-      stream_from "messages:#{params[:room]}"
+      stream_from "messages:#{params[:room].strip}"
     else
       # No room was selected
       stream_from "messages"

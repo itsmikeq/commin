@@ -1,6 +1,3 @@
 <div class="col s3 card">
-  <div id="messages_header" class="card-title">
-    Chat
-  </div>
-  <div id="messages" class="card-action"></div>
+  <%= react_component('ChatApplication', ws_url: Settings.ws.url) %>
 </div>
