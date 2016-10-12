@@ -2,6 +2,10 @@ class MessagesController < ApplicationController
   # Probably wont use this - quicker to send and receive on the websocket channel
   before_action :authenticate_user!
 
+  def index
+    render '/messages/index'
+  end
+
   def create
     message = Message.new(message_params)
     if message.save

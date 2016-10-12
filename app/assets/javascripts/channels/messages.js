@@ -5,15 +5,15 @@ var ConnectTo = function (room, appendId) {
       // put in a little delay due to race condition
       //setTimeout(this.perform('subscribed', {message_id: this.message_id}), 1000);
       // Called when the subscription is ready for use on the server
-      console.log("Connected");
+      console.log("Connected to " + room);
+      $.snackbar({content: "Connected to " + room});
     },
     disconnected: function () {
       // Called when the subscription has been terminated by the server
-      console.log("DISConnected");
-      // TODO: close chat window attached to the requested group
+      $.snackbar({content: "Disconnected from " + room});
+      // TODO: close chats window attached to the requested group
     },
     received: function (data) {
-      console.log(data);
       return document.getElementById(appendId).insertAdjacentHTML('beforeend', this.renderMessage(data));
     },
     renderMessage: function (data) {

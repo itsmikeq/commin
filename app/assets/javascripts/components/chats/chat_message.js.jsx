@@ -3,6 +3,7 @@ var ChatMessage = React.createClass({
 
   },
   componentDidMount: function () {
+    // TODO: Grab the last few messages
   },
   getInitialState: function () {
     return ({lastMessage: ""})
@@ -29,7 +30,7 @@ var ChatMessage = React.createClass({
     return (
         <div className="input-field">
           <input id="post-chat-input" name='post-chat' className="materialize-textarea focused"
-                 placeholder="What do you want to say?" ref="input-for-room"
+                 placeholder="Say Something" ref="input-for-room"
                  onKeyDown={this._handlePress}
           />
           <button type="button" onClick={this._handlePress} className="btn waves-effect waves-light">

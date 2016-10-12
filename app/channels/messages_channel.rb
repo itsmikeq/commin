@@ -14,8 +14,9 @@ class MessagesChannel < ApplicationCable::Channel
 
   # TODO: limit connection to rooms by users based on visibility levels and invites
   def create_message(data)
-    puts "Creating message with #{data}"
+    raise "No room defined - where should the message go?" unless data['room']
     message = Message.new(created_by: current_user.username, body: data['body'], room: data['room'])
+    # TODO: Add in @mention and direct the message to a single user in the room via messages:room:username filter
     if message.save
       ActionCable.server.broadcast "messages:#{params[:room]}", message.attributes
     else

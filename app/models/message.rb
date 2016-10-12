@@ -1,4 +1,5 @@
 class Message
+  include ElasticsearchFindable
   include Elasticsearch::Persistence::Model
   include Visibility
 
@@ -86,22 +87,6 @@ class Message
                        created_at: {order: 'desc'}
                      }],
       aggregations: {tags: {terms: {field: 'tags'}}},
-    )
-  end
-
-  def self.find_by(**options)
-    matchers = options.collect do |k, v|
-      {match: {k => v}}
-    end
-    search(
-      query: {
-        bool: {
-          must: [matchers]
-        }
-      },
-      sort:  [{
-                created_at: {order: 'desc'}
-              }]
     )
   end
 

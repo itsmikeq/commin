@@ -1,5 +1,6 @@
 class Room
   include Elasticsearch::Persistence::Model
+  include ElasticsearchFindable
   include Visibility
 
   # Room name
@@ -39,4 +40,7 @@ class Room
     super(options)
   end
 
+  def messages
+    Message.find_by(room: name)
+  end
 end

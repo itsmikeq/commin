@@ -20,7 +20,7 @@ class PostsController < ApplicationController
         # TODO: response based on friendship
         # TODO: If friend, then public + private + associated direct posts
         @posts = if @post && params[:children]
-                   @post.reply_posts.order("created_at desc").page(params[:page]).per(100)
+                   @post.reply_posts.order("created_at desc").page(params[:page]).per(10)
                  elsif @post
                    @posts = [@post]
                  else
