@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   get 'chat', to: 'messages#index'
   get 'messages', to: 'messages#index'
+  get 'messages/latest', to: 'messages#get_latest_messages'
   namespace :my do
     get 'friends', to: 'friends#index'
     get 'posts', to: 'posts#index'

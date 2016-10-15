@@ -39,6 +39,7 @@ class Post < ApplicationRecord
   scope :direct_posts, -> { where(visibility: DIRECT) }
 
   after_create :find_or_create_topics
+  after_create :push_into_es
   delegate :username, to: :user
 
   private if Rails.env.production?
@@ -53,5 +54,8 @@ class Post < ApplicationRecord
     end
   end
 
+  def push_into_es
+    puts "TODO: push data into elasticsearch"
+  end
 
 end

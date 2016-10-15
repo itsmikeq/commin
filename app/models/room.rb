@@ -20,21 +20,6 @@ class Room
   validates_presence_of :name
   validates_presence_of :created_by
 
-  # find_or_create_by(name: 'myroom', created_by: "a_user")
-  def self.find_or_create_by(args = {})
-    args = HashWithIndifferentAccess.new(args)
-    _room = search(query: {
-      match: {
-        name: args[:name]
-      }
-    }).first
-    if _room
-      return _room
-    else
-      create(name: args[:name], created_by: args[:created_by])
-    end
-  end
-
   def initialize(options = {})
     @id = self.id || SecureRandom.uuid
     super(options)

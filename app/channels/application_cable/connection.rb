@@ -4,7 +4,16 @@ module ApplicationCable
 
     def connect
       self.current_user = find_verified_user
+      # Tag the user making the connection
       logger.add_tags 'ActionCable', current_user.name
+    end
+
+    def session
+      cookies.encrypted[Rails.application.config.session_options[:key]]
+    end
+
+    def ability
+      # TODO: build out an abilities hash or whatever
     end
 
     protected

@@ -49,7 +49,6 @@ gem 'oj'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2', '~> 0.4.1'
-
 # sessions
 gem 'redis-session-store'
 # Rack cache

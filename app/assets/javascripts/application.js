@@ -18,6 +18,7 @@
 //= require react
 //= require components
 //= require cable
+//= require hashcode
 //= require_tree .
 
 //$(document).on('turbolinks:load', function () {
@@ -27,4 +28,5 @@ $(document).ready(function () {
   console.log("ready");
   // calls componentDidMount() on page load
   ReactRailsUJS.mountComponents();
+  $('.tooltipped').tooltip();
 });
