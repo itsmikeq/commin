@@ -48,7 +48,7 @@ class MessagesChannel < ApplicationCable::Channel
 
   def room
     @room ||= begin
-      Room.find_by(name: params[:room].strip).first || Room.find_or_create_by(name: params[:room].strip, created_by: current_user.username)
+      Room.search_by(name: params[:room].strip).first || Room.search_or_create_by(name: params[:room].strip, created_by: current_user.username)
     end
   end
 

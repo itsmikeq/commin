@@ -6,10 +6,10 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = if current_user
-               current_user.all_posts
+               Post.search_by(user_id: current_user.id)
              else
-               Post.public_posts
-             end.order("created_at desc").page(params[:page]).per(10)
+               Post.search_by(visibility: Post::PUBLIC)
+             end.page(params[:page]).per(10)
   end
 
   # GET /posts/1

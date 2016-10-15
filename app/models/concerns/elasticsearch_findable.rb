@@ -2,7 +2,7 @@ module ElasticsearchFindable
   extend ActiveSupport::Concern
   included do
     # find_or_create_by(name: 'myroom', created_by: "a_user")
-    def self.find_or_create_by(options = {})
+    def self.search_or_create_by(options = {})
       options = HashWithIndifferentAccess.new(options)
       matchers = options.collect do |k, v|
         {match: {k => v}}
@@ -22,7 +22,7 @@ module ElasticsearchFindable
       end
     end
 
-    def self.find_by(**options)
+    def self.search_by(**options)
       matchers = options.collect do |k, v|
         {match: {k => v}}
       end

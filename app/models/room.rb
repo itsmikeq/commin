@@ -26,6 +26,6 @@ class Room
   end
 
   def messages
-    Message.find_by(room: name)
+    Message.search_by(room: name)
   end
 end

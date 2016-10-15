@@ -26,8 +26,16 @@
 # TODO: filter by public-ness of the post
 class Post < ApplicationRecord
   include Visibility
+  include Elasticsearch::Model
+  # include Elasticsearch::Model::Callbacks
+  include ElasticsearchFindable
+  include Indexable
+  __elasticsearch__.client = Elasticsearch::Client.new host: Settings.elasticsearch.urls
+
+
   belongs_to :user
   belongs_to :sent_to_user, foreign_key: :sent_to_user_id, class_name: 'User'
+  belongs_to :post, foreign_key: :reply_post_id, class_name: 'Post'
   has_many :post_topics
   has_many :topics, through: :post_topics, dependent: :destroy
   has_many :reply_posts, foreign_key: :reply_post_id, class_name: 'Post'
@@ -41,6 +49,15 @@ class Post < ApplicationRecord
   after_create :find_or_create_topics
   after_create :push_into_es
   delegate :username, to: :user
+
+
+  def as_indexed_json(options={})
+    self.as_json(
+      include: { user: { only: :username},
+                 sent_to_user:    { only: :username },
+                 reply_posts: {methods: [:as_indexed_json]},
+      })
+  end
 
   private if Rails.env.production?
   # Finds/creates topics by searching post body

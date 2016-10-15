@@ -2,7 +2,7 @@ class My::PostsController < MyController
   before_action :authenticate_user!
 
   def index
-    @posts = current_user.posts
+    @posts = Post.search_by(user_id: current_user.id)
     respond_to do |format|
       format.html {
         render 'my/posts/index'
@@ -15,7 +15,7 @@ class My::PostsController < MyController
   end
 
   def direct
-    @posts = current_user.received_messages
+    @posts = Post.search_by(sent_to_user_id: current_user.id)
     respond_to do |format|
       format.html {
         render 'my/posts/direct'
