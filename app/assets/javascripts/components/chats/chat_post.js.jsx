@@ -42,7 +42,7 @@ var ChatPost = React.createClass({
             <button type="button" onClick={this._handlePress} className="btn waves-effect waves-light disabled">
               <div id="chat-loading">
                 <i className="fa fa-loader fa-spinner fa-spin"/>
-                Loading
+                Connecting
               </div>
               Post!
             </button>
