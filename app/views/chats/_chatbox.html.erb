@@ -1,3 +1,7 @@
-<div class="card">
-  <%= react_component('ChatApplication', ws_url: Settings.ws.url) %>
-</div>
+<% if current_user %>
+    <%= react_component('ChatApplication', ws_url: Settings.ws.url) %>
+<% else %>
+    <div>
+      If you want to chat, you must log in
+    </div>
+<% end %>

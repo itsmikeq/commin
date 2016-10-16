@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
 
   def get_latest_messages
     # the messages are sorted in reverse order, so first is the last message sent
-    render json: room.messages.first(20).sort_by{|e| e.created_at}.reverse
+    render json: room.messages.first(40).sort_by { |e| e.created_at }
   end
 
   def message_params
@@ -26,6 +26,7 @@ class MessagesController < ApplicationController
   end
 
   private if Rails.env.production?
+
   def room
     @room ||= begin
       Room.search_by(name: params[:room].strip).first || Room.search_or_create_by(name: params[:room].strip, created_by: current_user.username)

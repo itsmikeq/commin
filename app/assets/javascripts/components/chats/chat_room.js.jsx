@@ -53,8 +53,10 @@ var ChatRoom = React.createClass({
           $.snackbar({content: "Connected to " + room});
           // TODO: clean these up to remove JQ
           $('.disabled').removeClass('disabled');
-          document.getElementById('post-chat-input').removeAttribute('disabled')
-          $('#chat-loading').hide()
+          document.getElementById('post-chat-input').removeAttribute('disabled');
+          $('#chat-loading').hide();
+          // wait for it to show up
+          setTimeout(function(){document.getElementById('messages').scrollTo(0,document.body.scrollHeight)}, 200);
         },
         disconnected: function () {
           // Called when the subscription has been terminated by the server
@@ -75,7 +77,7 @@ var ChatRoom = React.createClass({
   render: function () {
     return (
         <div className="chat-room">
-          <div id="messages" className="card-action">
+          <div id="messages">
             {this.state.messages.map(function (msg) {
               return (<ChatMessage message={msg} key={"message_" + msg.id}/>)
             })}

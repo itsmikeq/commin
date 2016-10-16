@@ -1,5 +1,5 @@
 class Message
-  include ElasticsearchFindable
+  include ElasticsearchSearchable
   include Elasticsearch::Persistence::Model
   include Visibility
 

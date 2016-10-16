@@ -24,6 +24,7 @@ class MessagesChannel < ApplicationCable::Channel
   end
 
   # public methods are callable from the client side code
+  # run app.perform('like', {some: 'stuff'})
   def like(data)
     puts "Got #{data}"
     # Do some stuff with data here, like broadcast it
@@ -37,8 +38,7 @@ class MessagesChannel < ApplicationCable::Channel
   end
 
   def clean_body(_body)
-    # TODO: Make this a background job
-    # _body.gsub(/\n/, '<br>')
+    # TODO: Make this a background job, strip out xss bad stuff
     _body
   end
 

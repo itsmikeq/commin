@@ -18,35 +18,40 @@ var ChatPost = React.createClass({
   },
   _handlePress: function (event) {
     event.stopPropagation();
-    if (event.type == "click") {
-      var toSend = document.getElementById('post-chat-input').value;
-      this._sendMessage(toSend);
-      // used to keep history and cause a re-render of the dom element
-      this.setState({lastMessage: toSend});
-      document.getElementById('post-chat-input').focus();
-      document.getElementById('post-chat-input').removeAttribute('disabled')
-    }
+  },
+  _handleClick: function (event) {
+    event.stopPropagation();
+    var toSend = document.getElementById('post-chat-input').value;
+    this._sendMessage(toSend);
+    // used to keep history and cause a re-render of the dom element
+    this.setState({lastMessage: toSend});
+    document.getElementById('post-chat-input').focus();
+    document.getElementById('post-chat-input').removeAttribute('disabled');
+    // I think this timeout is needed because the entire thing is rerendered every post... may want to change
+    setTimeout(function () {
+      document.getElementById('messages').scrollTo(0, document.body.scrollHeight)
+    }, 200);
   },
   render: function () {
     this._clearInput();
     return (
         <div className="chat-messages">
-          <div className="input-field">
-            <textarea disabled id="post-chat-input" name='post-chat' className="materialize-textarea"
-                      ref="input-for-room"
-                      onKeyDown={this._handlePress}
+          <div className="input-field m5">
+            <input disabled id="post-chat-input" name='post-chat' type="text"
+                   ref="input-for-room"
+                   onKeyDown={this._handlePress}
             />
             <label htmlFor="post-chat-input">
               Say Something
             </label>
-            <button type="button" onClick={this._handlePress} className="btn waves-effect waves-light disabled">
-              <div id="chat-loading">
-                <i className="fa fa-loader fa-spinner fa-spin"/>
-                Connecting
-              </div>
-              Post!
-            </button>
           </div>
+          <button type="button" onClick={this._handleClick} className="btn waves-effect waves-light disabled">
+            <div id="chat-loading">
+              <i className="fa fa-loader fa-spinner fa-spin"/>
+              Connecting
+            </div>
+            Post!
+          </button>
         </div>
     );
 

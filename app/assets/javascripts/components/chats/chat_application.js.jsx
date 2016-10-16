@@ -39,26 +39,28 @@ var ChatApplication = React.createClass({
   },
   _selectRoom: function () {
     return (
-        <div className="chat-app">
-          <div className="input-field">
-            <input id="room-create-join" name='room-create-join'
-                   placeholder="Create Room" ref="input-for-room"
-                   onKeyDown={this._handlePress}
-            />
-            <button type="button" onClick={this._handleClick} className="btn waves-effect waves-light">
-              Join!
-            </button>
-          </div>
+        <div className="input-field">
+          <input id="room-create-join" name='room-create-join'
+                 placeholder="Create Room" ref="input-for-room"
+                 onKeyDown={this._handlePress}
+          />
+          <button type="button" onClick={this._handleClick} className="btn waves-effect waves-light">
+            Join!
+          </button>
         </div>
     )
   },
 
   render: function () {
     if (this.state.room == "") {
-      return (this._selectRoom());
+      return (
+          <div className="chat-app s10 m4">
+            {this._selectRoom()}
+          </div>
+      );
     } else {
       return (
-          <div className="chat-app">
+          <div className="chat-app s10 m4">
             <ChatRoom room={this.state.room} reset={this._reset}/>
           </div>
 

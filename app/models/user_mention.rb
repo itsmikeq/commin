@@ -1,5 +1,6 @@
 class UserMention
   include Elasticsearch::Persistence::Model
+  include ElasticsearchSearchable
 
   #
   # Created by (username)
@@ -13,9 +14,10 @@ class UserMention
   }}
 
   def self.find_by_username(_username)
+    _username = _username.start_with?("@") ? _username : "@#{_username}"
     search(
       query: {
-        match: {username: "@#{_username}"}
+        match: {username: _username}
       },
       sort:  [{
                 created_at: {order: 'desc'}
@@ -30,10 +32,10 @@ class UserMention
 
   # Has Many messages
   def messages
-    Message.all(
+    Message.search(
       query: {
         bool: {
-          should: [{match: {body: "@#{username}"}}]
+          should: [{match: {body: "@#{username} "}}]
         }
       },
       sort:  [{

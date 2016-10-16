@@ -9,7 +9,7 @@ class PostsController < ApplicationController
                Post.search_by(user_id: current_user.id)
              else
                Post.search_by(visibility: Post::PUBLIC)
-             end.page(params[:page]).per(10)
+             end.sort_by { |e| e.created_at }
   end
 
   # GET /posts/1

@@ -9,3 +9,9 @@
   color: $active-link-color;
   font-size: ($navlist-font-size * 1.10);
 }
+
+.nav-slider-small {
+  @extend .nav-slider;
+  font-size: $navlist-font-size-small;
+  font-weight: $bold-font-weight;
+}

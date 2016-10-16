@@ -1,6 +1,6 @@
 class Room
   include Elasticsearch::Persistence::Model
-  include ElasticsearchFindable
+  include ElasticsearchSearchable
   include Visibility
 
   # Room name
@@ -20,12 +20,34 @@ class Room
   validates_presence_of :name
   validates_presence_of :created_by
 
+  # find_or_create_by(name: 'myroom', created_by: "a_user")
+  def self.search_or_create_by(options = {})
+    options = HashWithIndifferentAccess.new(options)
+    matchers = options.collect do |k, v|
+      {match: {k => v}}
+    end
+    _room = search(query: {
+      bool: {
+        must: [matchers]
+      }
+    }).first
+    if _room
+      return _room
+    else
+      room = create(name: options[:name], created_by: options[:created_by])
+      if room.errors.any?
+        raise ArgumentError.new(room.errors.messages.to_s)
+      end
+    end
+  end
+
   def initialize(options = {})
     @id = self.id || SecureRandom.uuid
     super(options)
   end
 
-  def messages
-    Message.search_by(room: name)
+  def messages(options = {})
+    options.merge!(room: name)
+    Message.search_by(options)
   end
 end

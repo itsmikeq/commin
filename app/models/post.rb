@@ -28,7 +28,7 @@ class Post < ApplicationRecord
   include Visibility
   include Elasticsearch::Model
   # include Elasticsearch::Model::Callbacks
-  include ElasticsearchFindable
+  include ElasticsearchSearchable
   include Indexable
   __elasticsearch__.client = Elasticsearch::Client.new host: Settings.elasticsearch.urls
 
