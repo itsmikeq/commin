@@ -2,16 +2,22 @@
 <html>
 <%= render 'layouts/head' %>
 <body>
-<div class="bmd-layout-container-fluid bmd-drawer-f-l">
-  <%= render 'layouts/navbar' %>
-  <% if notice || alert %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-  <% end %>
-
+<!--Start your project here-->
   <div class="container-fluid">
-    <%= yield %>
+    <%= render 'layouts/navbar' %>
+    <%= render 'layouts/alerts' %>
+    <!--<main class="bmd-layout-content">-->
+    <main>
+      <% puts "Rendering Application" %>
+      <div class="container-fluid">
+        <!--/Start your project here-->
+        <%= yield %>
+        <div id="snackbar-error">
+        </div>
+        <div id="snackbar-info"></div>
+      </div>
+    </main>
   </div>
-</div>
+
 </body>
 </html>

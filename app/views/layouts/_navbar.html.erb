@@ -1,32 +1,66 @@
-<div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+<div class="fixed-action-btn horizontal hide-on-small-and-down valign-wrapper click-to-toggle" style="bottom: 45px; right: 24px;">
   <a class="btn-floating btn-large red">
     <i class="material-icons">menu</i>
   </a>
-  <!--<ul class="right-align nav-slider" style="background-color: rgba(229,229,229, 0.85)">-->
-  <%= active(my_friends_path) %>
-  <ul class="right-align nav-slider">
-    <li>
+  <ul class="right-align nav-slider valign">
+    <li class=" valign">
       <%= link_to my_friends_path, class: "#{active(my_friends_path)}" do %>
           <i class="fa fa-users">
           </i>
           Friends
-    <% end %>
+      <% end %>
     </li>
-    <li>
+    <li class=" valign">
       <%= link_to posts_path, class: "#{active(posts_path)}" do %>
           <i class="fa fa-quote-right">
           </i>
           Posts
-    <% end %>
+      <% end %>
     </li>
-    <li>
+    <li class=" valign">
       <%= link_to my_direct_messages_path, class: "#{active(my_direct_messages_path)}" do %>
           <i class="fa fa-long-arrow-right">
           </i>
           Direct Messages
-    <% end %>
+      <% end %>
     </li>
-    <li>
+    <li class=" valign">
+      <%= link_to '#', class: "" do %>
+          <i class="material-icons left">trending_up</i>
+          Trending
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<div class="fixed-action-btn horizontal hide-on-med-and-up click-to-toggle valign-wrapper" style="bottom: 45px; right: 24px;">
+  <a class="btn-floating btn-sized red">
+    <i class="material-icons">menu</i>
+  </a>
+
+  <ul class="right-align nav-slider valign">
+    <li class=" valign">
+      <%= link_to my_friends_path, class: "#{active(my_friends_path)}" do %>
+          <i class="fa fa-users">
+          </i>
+          Friends
+      <% end %>
+    </li>
+    <li class=" valign">
+      <%= link_to posts_path, class: "#{active(posts_path)}" do %>
+          <i class="fa fa-quote-right">
+          </i>
+          Posts
+      <% end %>
+    </li>
+    <li class=" valign">
+      <%= link_to my_direct_messages_path, class: "#{active(my_direct_messages_path)}" do %>
+          <i class="fa fa-long-arrow-right">
+          </i>
+          Direct Messages
+      <% end %>
+    </li>
+    <li class=" valign">
       <%= link_to '#', class: "" do %>
           <i class="material-icons left">trending_up</i>
           Trending

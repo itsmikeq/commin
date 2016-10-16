@@ -19,6 +19,7 @@
 //= require components
 //= require cable
 //= require hashcode
+//= require materialize
 //= require_tree .
 
 //$(document).on('turbolinks:load', function () {

@@ -59,6 +59,11 @@ class Post < ApplicationRecord
       })
   end
 
+  # give extra attributes to the default json
+  def as_json(**options)
+    super(options).merge(username: username)
+  end
+
   private if Rails.env.production?
   # Finds/creates topics by searching post body
   # TODO: Should be a background job

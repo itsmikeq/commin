@@ -1,7 +1,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
-@import "snackbarjs/dist/snackbar";
 @import "snackbarjs/themes-css/material";
+@import "snackbarjs/dist/snackbar";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -20,6 +20,7 @@
 @import "posts";
 @import "scaffolds";
 @import "home";
+@import "materialize/sass/materialize";
 @import "components/**/*";
 
 @import "animations/**/*";
@@ -30,7 +31,7 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url("#{asset_path('material-icons.ttf')}") format('truetype');
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url("#{asset_path('material-design-icons/iconfont/MaterialIcons-Regular.ttf')}") format('truetype');
 }
 
 .material-icons {
@@ -45,29 +46,39 @@
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
-  src: local('Roboto Light'), local('Roboto-Light'), url("#{asset_path('roboto-light.ttf')}") format('truetype');
+  src: local('Roboto Light'), local('Roboto-Light'), url("#{asset_path('Roboto-Light.ttf')}") format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url("#{asset_path('roboto-normal.ttf')}") format('truetype');
+  src: local('Roboto'), local('Roboto-Regular'), url("#{asset_path('Roboto-Normal.ttf')}") format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url("#{asset_path('roboto-medium.ttf')}") format('truetype');
+  src: local('Roboto Medium'), local('Roboto-Medium'), url("#{asset_path('Roboto-Medium.ttf')}") format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: local('Roboto Bold'), local('Roboto-Bold'), url("#{asset_path('roboto-bold.ttf')}") format('truetype');
+  src: local('Roboto Bold'), local('Roboto-Bold'), url("#{asset_path('Roboto-Bold.ttf')}") format('truetype');
 }

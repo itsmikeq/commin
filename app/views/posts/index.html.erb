@@ -4,14 +4,13 @@
   <% end %>
 </div>
 <div class="row">
-  <div class="col s2">
+  <div class="col m2 hide-on-small-only">
     Friends!
   </div>
-  <div class="col s7">
+  <div class="col s10 m6">
     <%= react_component('PostApplication', posts_url: posts_path) %>
   </div>
-  <%= render 'chats/chatbox' %>
-  <div id="snackbar-error">
+  <div class="col s2 m4 hide-on-small-only">
+    <%= render 'chats/chatbox' %>
   </div>
-  <div id="snackbar-info"></div>
 </div>

@@ -2,3 +2,17 @@
 .btn-reply {
   background-color: $button-color;
 }
+
+// does not seem to work, but it should
+//.sized-button {
+//  @include respond-to(small) {
+//    @extend .btn-small;
+//  }
+//  @include respond-to(medium){
+//    @extend .btn-medium;
+//  }
+//  @include respond-to(large){
+//    @extend .btn-large;
+//  }
+//
+//}
