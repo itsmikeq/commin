@@ -2,22 +2,24 @@
 <html>
 <%= render 'layouts/head' %>
 <body>
-<!--Start your project here-->
+<main>
   <div class="container-fluid">
-    <%= render 'layouts/navbar' %>
-    <%= render 'layouts/alerts' %>
-    <!--<main class="bmd-layout-content">-->
-    <main>
-      <% puts "Rendering Application" %>
-      <div class="container-fluid">
-        <!--/Start your project here-->
-        <%= yield %>
-        <div id="snackbar-error">
-        </div>
-        <div id="snackbar-info"></div>
+    <div class="row">
+      <div class="left">
+        <%= render 'layouts/alerts' %>
+        <%= render 'layouts/navbar' %>
       </div>
-    </main>
+      <div class="row">
+        <div class="col offset-m1 offset-s1 m11 s11">
+          <%= yield %>
+        </div>
+      </div>
+      <div id="snackbar-error">
+      </div>
+      <div id="snackbar-info"></div>
+    </div>
   </div>
+</main>
 
 </body>
 </html>
