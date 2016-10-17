@@ -1,3 +1,4 @@
+<h4>Chat</h4>
 <% if current_user %>
     <%= react_component('ChatApplication', ws_url: Settings.ws.url) %>
 <% else %>

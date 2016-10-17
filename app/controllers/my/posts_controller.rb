@@ -5,7 +5,7 @@ class My::PostsController < MyController
     @posts = Post.search_by(user_id: current_user.id)
     respond_to do |format|
       format.html {
-        render 'my/posts/index'
+        render 'posts/index'
       }
       format.json {
         render 'posts/index'

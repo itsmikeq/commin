@@ -1,11 +1,12 @@
 <div class="row">
-  <div class="col m2 hide-on-small-only">
-    Friends!
+  <div class="col m4 hide-on-small-only">
+    <%= render 'shared/friends_component' %>
   </div>
-  <div class="col s11 m5">
-    <%= react_component('PostApplication', posts_url: posts_path) %>
+  <div class="col s11 m4">
+    <%= render 'shared/posts_component' %>
   </div>
   <div class="col m4 hide-on-small-only">
-    <%= render 'chats/chatbox' %>
+    <h3>Chat</h3>
+    <%= render 'shared/chatbox_component' %>
   </div>
 </div>
