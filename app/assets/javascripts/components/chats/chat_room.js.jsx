@@ -31,7 +31,7 @@ var ChatRoom = React.createClass({
     var self = this;
     var _messages = [];
     $.ajax({
-      url: '/messages/latest.json?room=' + self.state.room,
+      url: Routes.messages_latest_path({format: 'json', room:  self.state.room}),
       success: function (data) {
         $.each(data, function (i, d) {
           _messages.push(d);

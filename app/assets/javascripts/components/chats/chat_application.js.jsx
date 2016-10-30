@@ -54,13 +54,13 @@ var ChatApplication = React.createClass({
   render: function () {
     if (this.state.room == "") {
       return (
-          <div className="chat-app s10 m4">
+          <div className="chat-app">
             {this._selectRoom()}
           </div>
       );
     } else {
       return (
-          <div className="chat-app s10 m4">
+          <div className="chat-app">
             <ChatRoom room={this.state.room} reset={this._reset}/>
           </div>
 

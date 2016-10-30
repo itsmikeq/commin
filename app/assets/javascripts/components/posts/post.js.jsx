@@ -28,7 +28,7 @@ var Post = React.createClass({
       }
     });
   },
-  componentWillMount: function(){
+  componentWillMount: function () {
     this._getChildrenFromApi();
   },
   _setPosted: function (_state) {
@@ -45,7 +45,7 @@ var Post = React.createClass({
   },
   _renderBody: function () {
     var htmlBody = this.props.post.body;
-    return htmlBody.replace(/(^|\s)#([a-z\d-]+)/ig, "$1<a href='" + gon.tags_url_base + "/$2' class='hash_tag'>#$2</a>");
+    return htmlBody.replace(/(^|\s)#([a-z\d-]+)/ig, "$1<a href='" + Routes.posts_by_tag_path({tag: '/$2'}) + "class='hash_tag'>#$2</a>");
   },
   _deletePost: function () {
     var self = this;
@@ -81,7 +81,7 @@ var Post = React.createClass({
       );
     }
   },
-  _appendToChildren: function(child){
+  _appendToChildren: function (child) {
     var children = this.state.reply_posts || [];
     children.push(child);
     this.state({reply_posts: children})
@@ -92,12 +92,15 @@ var Post = React.createClass({
     }
     var _reply_posts = [];
     var self = this;
+    var totalReplies = 0;
     this.state.reply_posts.forEach(
         function (reply_post) {
+          totalReplies = totalReplies + 1;
           _reply_posts.push(
               <Post post={reply_post}
                     callback={self._appendToChildren}
                     key={"reply_post_" + reply_post.id}
+                    appendClass={'z-depth-' + totalReplies}
               />
           );
         }
@@ -105,12 +108,17 @@ var Post = React.createClass({
     return (_reply_posts);
   },
   render: function () {
+    var rootClasses = 'row post ';
+    // If we are a child
+    if (this.props.appendClass) {
+      rootClasses = rootClasses + this.props.appendClass;
+    }
     return (
-        <div className="row post">
+        <div className={rootClasses}>
           <div id={'post_' + this.props.post.id} className="card">
             <div className="card-content">
               <div className="card-title text-darken-4 valign">
-                <a href={"/posts/by/user/" + this.props.post.username}>@{this.props.post.username}</a>
+                <a href={Routes.posts_by_user_path({username:  this.props.post.username})}>@{this.props.post.username}</a>
                 <Checkmark display={this.state.posted}/>
               </div>
               <h6 className="small">
@@ -121,17 +129,17 @@ var Post = React.createClass({
             <div className="card-action">
               {this._buildPostOptions()}
             </div>
+            {this.state.showResponse ?
+                <PostResponse post={this.props.post}
+                              hideMe={this._hideResponse}
+                              setPosted={this._setPosted}
+                              callback={this._getChildrenFromApi}/>
+                : null
+            }
             <div className="responses">
               {this._render_responses()}
             </div>
           </div>
-          {this.state.showResponse ?
-              <PostResponse post={this.props.post}
-                            hideMe={this._hideResponse}
-                            setPosted={this._setPosted}
-                            callback={this._getChildrenFromApi}/>
-              : null
-          }
         </div>
     )
   }

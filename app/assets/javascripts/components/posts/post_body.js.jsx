@@ -7,7 +7,7 @@ var PostBody = React.createClass({
     if (htmlBody == undefined) {
       return(null);
     }
-    htmlBody = htmlBody.replace(/(^|\s)#([a-z\d-]+)/ig, "$1<a href='" + gon.tags_url_base + "/$2' className='hashtag'>#$2</a>")
+    htmlBody = htmlBody.replace(/(^|\s)#([a-z\d-]+)/ig, "$1<a href='" + Routes.posts_by_tag_path({tag: '/$2'}) + "' className='hashtag'>#$2</a>")
     return (
         <p className="card-text">
           <span dangerouslySetInnerHTML={{__html: htmlBody}} />

@@ -11,7 +11,7 @@ var FriendsApplication = React.createClass({
     this._getFriends()
   },
   _getFriends: function () {
-    var url = this.props.url + '.json';
+    var url = Routes.my_friends_path({format: 'json'});
     var self = this;
     $.ajax({
       url: url,

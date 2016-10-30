@@ -40,7 +40,7 @@ var PostResponse = React.createClass({
     }
     var self = this;
     $.ajax({
-      url: '/posts.json',
+      url: Routes.posts_path({format: 'json'}),
       method: 'post',
       data: {id: this.props.post.id, "post[body]": data, "post[reply_post_id]": this.props.post.id},
       success: function (data) {

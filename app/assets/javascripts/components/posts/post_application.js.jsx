@@ -6,9 +6,9 @@ var PostApplication = React.createClass({
   },
   _getDataFromApi: function (_props) {
     console.log(_props);
-    var url = this.props.posts_url + '.json';
+    var url = Routes.posts_path({format: 'json'});
     if (_props != undefined) {
-      url = this.props.posts_url + '/' + _props.id + '.json'
+      url = Routes.post_path({format: 'json', id: _props.id})
     }
     var self = this;
     $.ajax({

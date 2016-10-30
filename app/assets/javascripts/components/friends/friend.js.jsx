@@ -22,7 +22,6 @@ var Friend = React.createClass({
     $.ajax({
       type: 'POST',
       data: JSON.stringify({id: this.props.friend_id}),
-      method: 'delete',
       contentType: 'application/json',
       url: Routes.my_friends_path({format: 'json'}),
       success: function (data) {
