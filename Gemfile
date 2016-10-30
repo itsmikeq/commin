@@ -38,6 +38,7 @@ gem 'font-awesome-sass', '~> 4.6.2'
 gem 'redis-namespace'
 gem 'gon'
 gem 'settingslogic'
+gem 'js-routes'
 
 # Background jobs
 gem 'sidekiq'

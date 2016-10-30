@@ -1,0 +1,8 @@
+.friend {
+  .toggle-friend {
+    cursor: pointer;
+  }
+  ~ .disabled {
+    opacity: 0.5;
+  }
+}

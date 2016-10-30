@@ -16,7 +16,7 @@ var Post = React.createClass({
     })
   },
   _getChildrenFromApi: function () {
-    var url = '/posts/' + this.props.post.id + '.json?children=true';
+    var url = Routes.post_path({format: 'json', id: this.props.post.id}) + '?children=true';
     var self = this;
     $.ajax({
       url: url,
@@ -53,8 +53,10 @@ var Post = React.createClass({
       return false;
     }
     $.ajax({
-      url: '/posts/' + self.props.post.id + '.json',
+      url: Routes.post_path({format: 'json', id: this.props.post.id}),
       method: 'delete',
+      contentType: 'application/json',
+      dataType: "json",
       success: function () {
         self._hidePost();
         //self._getChildrenFromApi();

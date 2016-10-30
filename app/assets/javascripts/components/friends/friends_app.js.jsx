@@ -4,6 +4,9 @@ var FriendsApplication = React.createClass({
       friends: []
     });
   },
+  getInitialProps: function(){
+    return({full: false})
+  },
   componentDidMount: function () {
     this._getFriends()
   },
@@ -23,7 +26,13 @@ var FriendsApplication = React.createClass({
   render: function() {
     var _rFriends = [];
     this.state.friends.map((friend)=> {
-      _rFriends.push(<Friend image_url={friend.profile_picture.url} username={friend.username} key={friend.id}/>);
+      _rFriends.push(<Friend image_url={friend.profile_picture.url}
+                             username={friend.username}
+                             key={friend.id}
+                             full={this.props.full}
+                             friend_id={friend.id}
+                             isFriend={true}
+      />);
     });
     return (
         <div>

@@ -8,12 +8,16 @@ Open door, open ideas, open mind
 Commin was created to build a community with common interest.  
 
 
-# App Rules
+## App Rules
 
 * Reads come from elastic search
 * Writes go to mysql, then to ES
 
-# TODO
+## JS Routes
+
+After routes change, sometimes you'll need to run `rake tmp:cache:clear` ro reset js routes
+
+## TODO
 
 * Personalized colors for responses
   * Color the box shadow -- selectable by user

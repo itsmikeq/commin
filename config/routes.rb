@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'messages/latest', to: 'messages#get_latest_messages'
   namespace :my do
     get 'friends', to: 'friends#index'
+    post 'friends', to: 'friends#toggle'
     get 'posts', to: 'posts#index'
     get 'direct_messages', to: 'posts#direct'
   end
