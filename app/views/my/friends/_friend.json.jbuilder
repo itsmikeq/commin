@@ -1,1 +1,1 @@
-json.extract! friend, :id, :username
+json.extract! friend, :id, :username, :profile_picture_url

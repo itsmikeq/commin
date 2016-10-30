@@ -18,7 +18,10 @@ class Room
   attribute :visibility, Integer, default: 0, mapping: {type: 'integer'}
 
   validates_presence_of :name
+  # validates :name, presence: true, uniqueness: true
+  validates_with EsUniquenessValidator
   validates_presence_of :created_by
+
 
   # find_or_create_by(name: 'myroom', created_by: "a_user")
   def self.search_or_create_by(options = {})
@@ -38,6 +41,7 @@ class Room
       if room.errors.any?
         raise ArgumentError.new(room.errors.messages.to_s)
       end
+      room
     end
   end
 

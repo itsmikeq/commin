@@ -18,7 +18,11 @@ class MessagesController < ApplicationController
 
   def get_latest_messages
     # the messages are sorted in reverse order, so first is the last message sent
-    render json: room.messages.first(40).sort_by { |e| e.created_at }
+    if room.messages.any?
+      render(json: room.messages.first(40).sort_by { |e| e.created_at })
+    else
+      render(json: [])
+    end
   end
 
   def message_params

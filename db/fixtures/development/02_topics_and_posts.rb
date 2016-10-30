@@ -1,3 +1,4 @@
+puts "Seeding topics and posts"
 require 'seed-fu'
 
 # Only the sending user can see the post

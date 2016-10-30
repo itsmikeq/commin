@@ -17,7 +17,7 @@ var PostApplication = React.createClass({
         self.setState({posts: data});
       },
       error: function (xhr, status, error) {
-        $('#snackbar-error').snackbar({content: error, style: "toast", htmlAllowed: true, timeout: 2000});
+        $.snackbar({content: error, style: "toast", htmlAllowed: true, timeout: 2000});
       }
     });
   },

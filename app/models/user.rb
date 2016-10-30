@@ -73,6 +73,19 @@ class User < ApplicationRecord
     messages.map(&:destroy)
   end
 
+  # Has Many relationship for Images
+  def user_images
+    UserImage.search_by(user_id: id)
+  end
+
+  def profile_picture
+    UserImage.search_by(user_id: id, purpose: 'profile').first
+  end
+
+  def profile_picture_url
+    UserImage.search_by(user_id: id, purpose: 'profile').first.try(:url)
+  end
+
   # Has Many relationship for messages
   def messages
     Message.all(
@@ -127,4 +140,7 @@ class User < ApplicationRecord
     username
   end
 
+  def as_json(options = {})
+    super(options.merge({include: :profile_picture}))
+  end
 end

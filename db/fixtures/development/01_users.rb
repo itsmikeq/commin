@@ -1,3 +1,4 @@
+puts "Seeding users"
 require 'seed-fu'
 users = []
 User.create!(

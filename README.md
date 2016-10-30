@@ -1,5 +1,18 @@
 # README
 
+Open door, open ideas, open mind
+
+
+## WHY
+
+Commin was created to build a community with common interest.  
+
+
+# App Rules
+
+* Reads come from elastic search
+* Writes go to mysql, then to ES
+
 # TODO
 
 * Personalized colors for responses
@@ -16,4 +29,6 @@
 * Allow for users to create avatars
 * Add Elastic Search functionality so things are not so slow
   * https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-persistence
-* Add pagination for post views  
+* Add pagination for post views
+* Sign up flows that invite people to share their likes
+* Image copy/paste/add

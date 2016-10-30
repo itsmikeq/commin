@@ -77,7 +77,7 @@ class Post < ApplicationRecord
   end
 
   def push_into_es
-    puts "TODO: push data into elasticsearch"
+    # TODO: push data into elasticsearch
   end
 
 end

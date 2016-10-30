@@ -16,14 +16,14 @@ var FriendsApplication = React.createClass({
         self.setState({friends: data});
       },
       error: function (xhr, status, error) {
-        $('#snackbar-error').snackbar({content: error, style: "toast", htmlAllowed: true, timeout: 2000});
+        $.snackbar({content: xhr.responseJSON.error, style: "toast", htmlAllowed: true, timeout: 2000});
       }
     });
   },
   render: function() {
     var _rFriends = [];
     this.state.friends.map((friend)=> {
-      _rFriends.push(<Friend image_url={null} username={friend.username} key={friend.id}/>);
+      _rFriends.push(<Friend image_url={friend.profile_picture.url} username={friend.username} key={friend.id}/>);
     });
     return (
         <div>
