@@ -5,7 +5,7 @@ module ElasticsearchHelpers
   #
   # http://stackoverflow.com/questions/16205341/symbols-in-query-string-for-elasticsearch
   #
-  def self.sanitize_string(str)
+  def sanitize_string(str)
     # Escape special characters
     # http://lucene.apache.org/core/old_versioned_docs/versions/2_9_1/queryparsersyntax.html#Escaping Special Characters
     escaped_characters = Regexp.escape('\\+-&|!(){}[]^~*?:\/')

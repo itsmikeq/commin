@@ -71,7 +71,7 @@ class Message
   # TODO: Create hashtags and user mentions
   # TODO: Create notifications per watches on hashtags and user mentions
   after_save do
-    puts "TODO: Create mentions, hashtags, and notifications"
+    # TODO: Create mentions, hashtags, and notifications
     create_user_mentions
   end
 
@@ -126,7 +126,8 @@ class Message
     body.scan(/(^|\s)@([a-z\d.-]+)/).map(&:last).each do |word|
       UserMention.create(message_id: id, username: word)
     end
-
+  rescue => e
+    Rails.logger.error e.message
   end
 
   def create_tags
@@ -135,6 +136,8 @@ class Message
         tags.push(word.strip)
       end
     end
+  rescue => e
+    Rails.logger.error e.message
   end
 
 end

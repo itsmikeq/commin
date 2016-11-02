@@ -10,14 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017032358) do
+ActiveRecord::Schema.define(version: 20161101043411) do
 
   create_table "friendships", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["friend_id", "user_id"], name: "index_friendships_on_friend_id_and_user_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_friendships_on_user_id", using: :btree
+  end
+
+  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "permission"
+    t.string   "owned_by"
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "identities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -27,6 +37,17 @@ ActiveRecord::Schema.define(version: 20161017032358) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
+  end
+
+  create_table "personas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.string   "screen_name"
+    t.integer  "group_id"
+    t.boolean  "default"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["group_id"], name: "index_personas_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_personas_on_user_id", using: :btree
   end
 
   create_table "post_topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -50,6 +71,21 @@ ActiveRecord::Schema.define(version: 20161017032358) do
     t.index ["sent_to_user_id"], name: "index_posts_on_sent_to_user_id", using: :btree
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
     t.index ["visibility"], name: "index_posts_on_visibility", using: :btree
+  end
+
+  create_table "profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.string   "photo_url"
+    t.text     "intro",           limit: 65535
+    t.string   "sex"
+    t.string   "religion"
+    t.string   "political_party"
+    t.string   "language"
+    t.string   "nickname"
+    t.integer  "visibility"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
   create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -95,8 +131,11 @@ ActiveRecord::Schema.define(version: 20161017032358) do
 
   add_foreign_key "friendships", "users"
   add_foreign_key "identities", "users"
+  add_foreign_key "personas", "groups"
+  add_foreign_key "personas", "users"
   add_foreign_key "post_topics", "posts"
   add_foreign_key "post_topics", "topics"
   add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "users"
   add_foreign_key "topics", "users"
 end

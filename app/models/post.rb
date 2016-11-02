@@ -26,12 +26,8 @@
 # TODO: filter by public-ness of the post
 class Post < ApplicationRecord
   include Visibility
-  include Elasticsearch::Model
-  # include Elasticsearch::Model::Callbacks
   include ElasticsearchSearchable
   include Indexable
-  __elasticsearch__.client = Elasticsearch::Client.new host: Settings.elasticsearch.urls
-
 
   belongs_to :user
   belongs_to :sent_to_user, foreign_key: :sent_to_user_id, class_name: 'User'
@@ -74,6 +70,8 @@ class Post < ApplicationRecord
         topics << topic
       end
     end
+  rescue => e
+    puts e.message
   end
 
   def push_into_es

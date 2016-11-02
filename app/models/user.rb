@@ -46,6 +46,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
   has_many :identities
+  has_many :personas
+  has_many :groups, through: :personas
   # Users @user is friends with
   has_many :friendships
   has_many :friends, -> { where(banned: false) }, :through => :friendships
@@ -57,6 +59,7 @@ class User < ApplicationRecord
   has_many :topics
   # posts @user has created
   has_many :posts
+  has_one :profile
   after_destroy :remove_messages
 
   validates_presence_of :username
@@ -71,6 +74,10 @@ class User < ApplicationRecord
 
   def remove_messages
     messages.map(&:destroy)
+  end
+
+  def default_persona
+    personas.find_by(default: true)
   end
 
   # Has Many relationship for Images

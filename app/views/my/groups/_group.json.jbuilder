@@ -1,0 +1,1 @@
+json.extract! group, :id, :name, :permission, :owner, :type

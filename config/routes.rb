@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :groups
+
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
   get 'chat', to: 'messages#index'
@@ -10,6 +12,10 @@ Rails.application.routes.draw do
     post 'friends', to: 'friends#toggle'
     get 'posts', to: 'posts#index'
     get 'direct_messages', to: 'posts#direct'
+    # get 'personas', to: 'personas#index'
+    resources :personas
+    resources :profile
+    resources :groups
   end
 
   get 'home/index'

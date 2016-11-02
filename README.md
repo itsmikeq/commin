@@ -7,6 +7,17 @@ Open door, open ideas, open mind
 
 Commin was created to build a community with common interest.  
 
+## Groups
+
+These are differentiations of users based on the group.  If you want to be "Super Gamer" 
+ 
+## Personas
+
+These are your different "yous" when in different groups/communities
+
+## Profile
+
+Your real you.
 
 ## App Rules
 

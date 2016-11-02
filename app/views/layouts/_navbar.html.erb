@@ -33,6 +33,19 @@
         Trending
     <% end %>
   </li>
+  <li class=" valign">
+    <% if @current_user %>
+        <%= link_to destroy_user_session_path, class: "", method: :delete do %>
+            <i class="fa fa-sign-out"></i>
+            Sign Out
+        <% end %>
+    <% else %>
+        <%= link_to new_user_session_path, class: "" do %>
+            <i class="fa fa-sign-in"></i>
+            Sign In
+        <% end %>
+    <% end %>
+  </li>
 </ul>
 <div class="hide-on-small-only" style="margin-top:20px">
   <div class="navbar-fixed-top">

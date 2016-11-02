@@ -10,7 +10,8 @@
 #
 # Indexes
 #
-#  index_friendships_on_user_id  (user_id)
+#  index_friendships_on_friend_id_and_user_id  (friend_id,user_id) UNIQUE
+#  index_friendships_on_user_id                (user_id)
 #
 # Foreign Keys
 #
@@ -20,5 +21,4 @@
 class Friendship < ApplicationRecord
   belongs_to :user
   belongs_to :friend, :class_name => 'User', :foreign_key => :friend_id
-  validates_uniqueness_of :friend, scope: :user
 end
