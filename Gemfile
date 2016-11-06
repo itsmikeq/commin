@@ -56,7 +56,7 @@ gem 'redis-session-store'
 gem 'redis-rack-cache'
 # Protect against bruteforcing
 gem "rack-attack", '~> 4.3.1'
-
+gem 'active_model_serializers', '~> 0.10.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/search', controller: 'search', action: 'search'
+
   resources :groups
 
   # Serve websocket cable requests in-process
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
   get 'posts/by/tag/:tag', constraints: { tag: /[a-zA-Z.\/0-9_\-]+/ }, :to => "posts_by_tag#posts", :as => :posts_by_tag
   # get 'tags/:tag', constraints: { tag: /[a-zA-Z.\/0-9_\-]+/ }, :to => "posts_by_tag#posts", :as => :posts_by_tag
   resources :posts
+  get 'posts/:id/replies', controller: 'posts', action: 'replies'
   resources :posts_by_tag
   resources :topics
   resources :friendships

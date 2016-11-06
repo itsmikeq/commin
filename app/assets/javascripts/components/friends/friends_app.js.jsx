@@ -25,11 +25,12 @@ var FriendsApplication = React.createClass({
   },
   render: function() {
     var _rFriends = [];
+    self = this;
     this.state.friends.map(function(friend) {
       _rFriends.push(<Friend image_url={friend.profile_picture_url}
                              username={friend.username}
                              key={friend.id}
-                             full={this.props.full}
+                             full={self.props.full}
                              friend_id={friend.id}
                              isFriend={true}
       />);

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :replies]
 
   # GET /posts
   # GET /posts.json
@@ -41,6 +41,17 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+  end
+
+  def replies
+    respond_to do |format|
+      format.json {
+        render json: @posts.reply_posts, serializer: PostSerializer
+      }
+      format.html {
+        render "whatcha doing?", layout: nil
+      }
+    end
   end
 
   # POST /posts
@@ -87,7 +98,11 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   # TODO: Filter for current_user access
   def set_post
-    @post = Post.find_by(id: params[:id])
+    @post = if current_user
+              Post.find_by(id: params[:id])
+            else
+              Post.public_posts.find_by(id: params[:id])
+            end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

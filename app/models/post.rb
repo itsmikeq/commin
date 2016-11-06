@@ -57,7 +57,7 @@ class Post < ApplicationRecord
 
   # give extra attributes to the default json
   def as_json(**options)
-    super(options).merge(username: username)
+    HashWithIndifferentAccess.new(super(options).merge(username: username))
   end
 
   private if Rails.env.production?
