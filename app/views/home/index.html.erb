@@ -1,16 +1,28 @@
-<div class="row">
-  <% if current_user %>
-      Current user: <%= current_user.username %>
-  <% end %>
-</div>
-<div class="row">
-  <div class="col m2 hide-on-small-only">
-    Friends!
+<div class="flex-container">
+  <div class="col m3 hide-on-small-only friends">
+    <% if @current_user %>
+        <p>MY FRIENDS</p>
+        <%= render 'shared/friends_component' %>
+    <% else %>
+        <p class="center-align">OTHER USERS</p>
+        <%= render 'shared/public_users_component' %>
+    <% end %>
   </div>
-  <div class="col s10 m6">
+  <div class="col s12 m5">
     <%= react_component('PostApplication', posts_url: posts_path) %>
   </div>
-  <div class="col s2 m4 hide-on-small-only">
-    <%= render 'shared/chatbox_component' %>
+  <div class="col m4  hide-on-small-only">
+    <% if @current_user %>
+        <%= render 'shared/chatbox_component' %>
+    <% else %>
+        <h3>Why Join?</h3>
+        <div>
+          <ul class="flow-text">
+            <li>Because its the coolest place ever</li>
+            <li>Chat with your friends or groups of friends</li>
+          </ul>
+        </div>
+    <% end %>
   </div>
 </div>
+

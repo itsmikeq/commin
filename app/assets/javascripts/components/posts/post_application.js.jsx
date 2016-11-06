@@ -39,7 +39,6 @@ var PostApplication = React.createClass({
     if (_posts.length > 0) {
       return (
           <div>
-            <Search/>
             <div id="posts">
               {_posts}
             </div>
@@ -48,9 +47,8 @@ var PostApplication = React.createClass({
     } else {
       return (
           <div className="row">
-            <div className="col s8">
-              Nothing here... try looking for something
-              <Search/>
+            <div className="col m8 s12 center-align">
+              <i className="fa fa-circle-o-notch fa-spin fa-3x"/>
             </div>
           </div>
       );

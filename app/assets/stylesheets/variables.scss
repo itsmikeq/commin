@@ -7,11 +7,21 @@ $breakpoints: (
         large : 1024px
 );
 
-$primary-color: #8277e9;
+$p-font-sizes: (
+        null  : 11px,
+        480px : 12px,
+        640px : 12px,
+        1024px: 12px
+);
+
+$primary-color: #03A9F4;
 $button-color: #8ce9a1;
-$link-color: #5355ff;
+$link-color: #01579b;
 $active-link-color: #4535ff;
-$button-background-color: #dce8da;
+$button-background-color: #bbdefb;
+$body-background-color: #e3f2fd;
+$black: #0e0e0e;
+
 // Font weights
 $light: 200;
 $regular: 400;
@@ -19,12 +29,12 @@ $bold: 600;
 // Base Font
 $base-font-family: Roboto, sans-serif;
 $base-font-weight: $regular;
-$base-font-size: 13px;
+$base-font-size: 1.2vmin;
 $base-line-height: 1.4;
 
 $bold-font-weight: $bold;
 
-$navlist-font-size: ($base-font-size * 1.35);
+$navlist-font-size: ($base-font-size * 1.15);
 $navlist-font-size-small: ($base-font-size * 0.75);
 
 // Fixed Font
@@ -53,5 +63,18 @@ $hover-link-color: darken( $link-color, 10% );
   @else {
     @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
         + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      font-size: $fs-font-size;
+    }
+    @else {
+      @media screen and (min-width: $fs-breakpoint) {
+        font-size: $fs-font-size;
+      }
+    }
   }
 }

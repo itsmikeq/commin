@@ -3,16 +3,14 @@
 <%= render 'layouts/head' %>
 <body>
 <main>
-  <div class="container-fluid">
+  <%= render 'layouts/navbar' %>
+  <div class="container-fluid top-buffer">
     <div class="row">
       <div class="left">
         <%= render 'layouts/alerts' %>
-        <%= render 'layouts/navbar' %>
       </div>
-      <div class="row">
-        <div class="col offset-m1 offset-s1 m11 s11">
-          <%= yield %>
-        </div>
+      <div class="col s12">
+        <%= yield %>
       </div>
       <div id="snackbar-error">
       </div>

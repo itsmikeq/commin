@@ -26,6 +26,7 @@
 
 @import "animations/**/*";
 @import "navigation";
+@import "friendships";
 //@import "animations/checkmark";
 //@import "animations/search";
 
@@ -40,7 +41,7 @@
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: 2vmin;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -83,4 +84,12 @@
   font-style: normal;
   font-weight: 700;
   src: local('Roboto Bold'), local('Roboto-Bold'), url("#{asset_path('Roboto-Bold.ttf')}") format('truetype');
+}
+
+.top-buffer {
+  margin-top: 13px;
+}
+
+i.fa {
+  color: $black;
 }

@@ -1,7 +1,7 @@
 <ul id="slide-out" class="side-nav">
   <li>
     <div class="userView">
-      <img class="background" src="https://dummyimage.com/400x300/a5adc7/fff.png&text=Image+Here">
+      <img class="background" src="https://dummyimage.com/400x300/a5adc7/fff.png">
       <img class="circle" src="https://dummyimage.com/200x200/d1cad1/fff.png&text=User+Face">
       <span class="white-text name"><%= current_user.try(:username) %></span>
     </div>
@@ -47,17 +47,29 @@
     <% end %>
   </li>
 </ul>
-<div class="hide-on-small-only" style="margin-top:20px">
-  <div class="navbar-fixed-top">
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="medium material-icons">menu</i></a>
+<div class="navbar-fixed" style="margin-top: -20px;">
+  <nav>
+    <div class="nav-wrapper search">
+      <ul class="right center-align">
+        <li>
+            <%= render('shared/search_component') %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="hide-on-small-only" style="margin-top:20px">
+    <div class="navbar-fixed-top">
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="medium material-icons">menu</i></a>
+    </div>
   </div>
-</div>
-<div class="hide-on-med-and-up" style="margin-top:20px">
-  <div class="navbar-fixed-top">
-    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+  <div class="hide-on-med-and-up" style="margin-top:20px">
+    <div class="navbar-fixed-top">
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
   </div>
 </div>
 <script>
+  $('.collapsible').collapsible({});
   $('.button-collapse').sideNav({
         menuWidth: 240, // Default is 240
         edge: 'left', // Choose the horizontal origin

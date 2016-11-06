@@ -49,15 +49,16 @@ var Friend = React.createClass({
             <i className={this.classForStatus()}/>
           </div>
           <div className="row valign-wrapper">
-            <div className="col s4">
+            <div className="col l4 user-face center-align">
               <img src={this.props.image_url} alt=""
                    className="circle responsive-img"/>
+              <div>{this.props.username}</div>
             </div>
-            <div className="col s8">
-              <span className="black-text">
-                <p>TODO: Put a user's profile stuff here. Truncate to a couple lines</p>
+            <div className="col l10 hide-on-med-and-down">
+              <div className="black-text">
+                <p className=" user-info">TODO: Put a user's profile stuff here. Truncate to a couple lines</p>
                 {this.props.full && this.extraRenderItems()}
-              </span>
+              </div>
             </div>
           </div>
         </div>

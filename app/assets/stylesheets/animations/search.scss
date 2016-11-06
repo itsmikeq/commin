@@ -1,27 +1,37 @@
 .animate-away {
-  i {
+  @mixin search-animation {
     color: #999;
-    font-size: 18px;
+    font-size: 2vmin;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
     right: 50px;
-    top: 10px;
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+
+  }
+  & i {
+    @include search-animation;
+    top: 0;
+  }
+  @media #{$small-and-down} {
+    & i {
+      @include search-animation;
+      top: 15px;
+    }
   }
   /* active state */
   input:focus ~ i, input:active ~ i {
     top: -20px;
-    font-size: 14px;
+    font-size: 1.3vmin;
     color: #5264AE;
   }
 
   .highlight {
     position: absolute;
     height: 60%;
-    width: 100px;
+    width: 100%;
     top: 25%;
     left: 0;
     pointer-events: none;

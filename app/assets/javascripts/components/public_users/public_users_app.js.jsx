@@ -1,17 +1,21 @@
-var FriendsApplication = React.createClass({
+var PublicUsersApp = React.createClass({
+
   getInitialState: function () {
-    return ( {
+    return ({
       friends: []
-    });
+    })
   },
-  getDefaultProps: function(){
-    return({full: false})
+  getDefaultProps: function () {
+    return ({
+      full: false
+    })
   },
   componentDidMount: function () {
-    this._getFriends()
+    this._getFriends();
   },
+
   _getFriends: function () {
-    var url = Routes.my_friends_path({format: 'json'});
+    var url = Routes.public_users_path({format: 'json'});
     var self = this;
     $.ajax({
       url: url,
@@ -22,16 +26,19 @@ var FriendsApplication = React.createClass({
         $.snackbar({content: xhr.responseJSON.error, style: "toast", htmlAllowed: true, timeout: 2000});
       }
     });
+
   },
-  render: function() {
+
+  render: function () {
     var _rFriends = [];
-    this.state.friends.map(function(friend) {
+    this.state.friends.map(function (friend) {
+      console.log('friend', friend);
       _rFriends.push(<Friend image_url={friend.profile_picture_url}
                              username={friend.username}
                              key={friend.id}
-                             full={this.props.full}
+                             full={false}
                              friend_id={friend.id}
-                             isFriend={true}
+                             isFriend={false}
       />);
     });
     return (
@@ -40,4 +47,6 @@ var FriendsApplication = React.createClass({
         </div>
     );
   }
+
+
 });

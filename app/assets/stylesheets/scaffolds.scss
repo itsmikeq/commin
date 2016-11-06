@@ -1,10 +1,17 @@
 body {
-  background-color: #fff;
+  background-color: $body-background-color;
   color: #333;
   font-family: $base-font-family;
   font-size: $base-font-size;
   line-height: $base-line-height;
   margin: $base-margin;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
 }
 
 a {
@@ -27,6 +34,7 @@ label {
   position: relative;
   display: inline-block;
 }
+
 ul.scoot-up {
   margin-top: -5px;
   right: 34px !important;
@@ -41,4 +49,8 @@ ul.scoot-up {
 
 .hoverable {
   cursor: pointer;
+}
+
+p {
+  @include font-size($p-font-sizes)
 }

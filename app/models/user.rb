@@ -27,6 +27,7 @@
 #  private                :boolean          default(FALSE)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  visibility             :integer
 #
 # Indexes
 #
@@ -41,6 +42,7 @@
 # TODO: Send all users to ES
 class User < ApplicationRecord
   include Roleable
+  include Visibility
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -65,7 +67,7 @@ class User < ApplicationRecord
   validates_presence_of :username
   validates_uniqueness_of :username
 
-  scope :public_users, -> { where(public: true) }
+  scope :public_users, -> { where(visibility: PUBLIC) }
 
   # TODO: Abstract into auth hash builder
   def self.create_with_omniauth(info)
@@ -90,7 +92,7 @@ class User < ApplicationRecord
   end
 
   def profile_picture_url
-    UserImage.search_by(user_id: id, purpose: 'profile').first.try(:url)
+    UserImage.search_by(user_id: id, purpose: 'profile').first.try(:url) || image_url
   end
 
   # Has Many relationship for messages
@@ -148,6 +150,6 @@ class User < ApplicationRecord
   end
 
   def as_json(options = {})
-    super(options.merge({include: :profile_picture}))
+    HashWithIndifferentAccess.new(super(options.merge({include: :profile_picture})).merge({profile_picture_url: profile_picture_url}))
   end
 end

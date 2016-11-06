@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   end
 
   get 'home/index'
+  get 'public_users', controller: 'users', action: 'public_users'
+
   # posts_by_user_path
   get 'posts/by/user/:username', constraints: { username: /[a-zA-Z.\/0-9_\-]+/ }, :to => "posts_by_user#index", :as => :posts_by_user
   # Used in gon variable... Be sure to change there too
