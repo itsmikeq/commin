@@ -1,30 +1,30 @@
 var PostApplication = React.createClass({
   getInitialState: function () {
     return ({
-      posts: []
+      posts: this.props.posts
     })
   },
+  getDefaultProps: function () {
+    return ({posts: []})
+  },
   _getDataFromApi: function (_props) {
-    console.log(_props);
-    var url = Routes.posts_path({format: 'json'});
-    if (_props != undefined) {
-      url = Routes.post_path({format: 'json', id: _props.id})
-    }
     var self = this;
-    $.ajax({
-      url: url,
-      success: function (data) {
-        self.setState({posts: data});
-      },
-      error: function (xhr, status, error) {
-        $.snackbar({content: error, style: "toast", htmlAllowed: true, timeout: 2000});
+    PostsApi.getDataFromApi({
+      callback: function (data) {
+        self.setState({posts: data})
       }
-    });
+    })
   },
   componentDidMount: function () {
-    this._getDataFromApi();
+    if (this.props.posts.length < 1) {
+      this._getDataFromApi();
+    } else {
+      this.setState({posts: this.props.posts})
+    }
   },
   render: function () {
+    console.log('posts', this.props.posts);
+
     _posts = [];
     var self = this;
     this.state.posts.forEach(

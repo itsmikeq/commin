@@ -1,8 +1,7 @@
 class Search
   def self.search(q, option={}, limit=100, offset=0)
-    client = Elasticsearch::Client.new hosts: Settings.elasticsearch.urls, adapter: :net_http
-    res        = client.search q, [Post]
-    OpenStruct.new(total: res.count, data: res, total: res.response.hits.total)
+    res        = Elasticsearch::Model.search(q, [Post], size: limit, from: offset)
+    OpenStruct.new(total: res.count, data: res, hit_total: res.response.hits.total)
   end
 
   def self.autocomplete(q, limit=100)
