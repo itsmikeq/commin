@@ -142,7 +142,7 @@ class User < ApplicationRecord
 
   # TODO: Unstub and allow for image uploads
   def image_url
-    "https://dummyimage.com/52x52/000/fff.png"
+    "http://placehold.it/52x52?text=#{username}"
   end
 
   def to_param
