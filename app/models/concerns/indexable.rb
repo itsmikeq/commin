@@ -7,7 +7,7 @@ module Indexable
     __elasticsearch__.client = Elasticsearch::Client.new host: Settings.elasticsearch.urls
 
     settings index: { number_of_shards: 3 } do
-      mappings dynamic: 'true', index_options: 'offsets'
+      mappings dynamic: 'true'
     end
 
     def self.search(query_or_definition, options={})
