@@ -6,10 +6,14 @@ puts "Seeding Friendships"
     if user.friends.include?(user)
       friend = User.all.sample
     end
+    tries = 0
     begin
       user.friends << friend
-    rescue
-      retry
+    rescue => e
+      tries += 1
+      retry unless tries > 3
     end
   end
 end
+
+puts "Done with friends"
